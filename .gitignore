@@ -1,0 +1,92 @@
+# Build artifacts
+build/
+cmake-build-*/
+out/
+dist/
+*.o
+*.a
+*.so
+*.dylib
+*.exe
+*.dll
+*.lib
+*.pdb
+
+# CMake / Ninja
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+compile_commands.json
+CTestTestfile.cmake
+_deps/
+.ninja_deps
+.ninja_log
+build.ninja
+
+# IDE / editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+*.code-workspace
+.clangd/
+.cache/
+
+# Python (scripts, benches, HAF helpers)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# Node / SDK stubs
+node_modules/
+npm-debug.log*
+yarn-error.log*
+package-lock.json
+pnpm-lock.yaml
+
+# Coverage / test output
+coverage/
+*.gcda
+*.gcno
+*.gcov
+.pytest_cache/
+.mypy_cache/
+htmlcov/
+*.profraw
+*.profdata
+
+# Logs and local data
+*.log
+logs/
+data/
+witness_node_data_dir/
+blockchain/
+shared_memory.bin
+*.wal
+
+# Secrets — never commit
+*.pem
+*.key
+*.p12
+id_rsa*
+*.secret
+credentials.json
+.secrets/
+secrets/
+
+# OS
+Thumbs.db
+Desktop.ini
+
+# Temporary
+tmp/
+temp/
+*.tmp
+*.bak
+.scratch/
