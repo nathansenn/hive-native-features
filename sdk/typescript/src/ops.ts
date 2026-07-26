@@ -28,17 +28,6 @@ import {
 } from "./types.js";
 
 // ---------------------------------------------------------------------------
-// Defaults helpers
-// ---------------------------------------------------------------------------
-
-function withDefaults<T extends object>(
-  fields: Partial<T>,
-  defaults: T
-): T {
-  return { ...defaults, ...fields };
-}
-
-// ---------------------------------------------------------------------------
 // NFT payload builders (protocol field shapes)
 // ---------------------------------------------------------------------------
 
@@ -46,62 +35,62 @@ export function nftCreateCollection(
   fields: Partial<NftCreateCollectionOperation> &
     Pick<NftCreateCollectionOperation, "creator" | "symbol" | "name">
 ): NftCreateCollectionOperation {
-  return withDefaults(fields, {
+  return {
     creator: fields.creator,
     symbol: fields.symbol,
     name: fields.name,
-    max_supply: 0,
-    transferable: true,
-  });
+    max_supply: fields.max_supply ?? 0,
+    transferable: fields.transferable ?? true,
+  };
 }
 
 export function nftMint(
   fields: Partial<NftMintOperation> &
     Pick<NftMintOperation, "creator" | "collection" | "to" | "metadata_hash">
 ): NftMintOperation {
-  return withDefaults(fields, {
+  return {
     creator: fields.creator,
     collection: fields.collection,
     to: fields.to,
     metadata_hash: fields.metadata_hash,
-    uri: "",
-    soulbound: false,
-  });
+    uri: fields.uri ?? "",
+    soulbound: fields.soulbound ?? false,
+  };
 }
 
 export function nftTransfer(
   fields: Partial<NftTransferOperation> &
     Pick<NftTransferOperation, "from" | "to" | "nft_id">
 ): NftTransferOperation {
-  return withDefaults(fields, {
+  return {
     from: fields.from,
     to: fields.to,
     nft_id: fields.nft_id,
-    memo: "",
-  });
+    memo: fields.memo ?? "",
+  };
 }
 
 export function nftApprove(
   fields: Partial<NftApproveOperation> &
     Pick<NftApproveOperation, "owner" | "nft_id">
 ): NftApproveOperation {
-  return withDefaults(fields, {
+  return {
     owner: fields.owner,
     nft_id: fields.nft_id,
-    approved: "",
-  });
+    approved: fields.approved ?? "",
+  };
 }
 
 export function nftSetApprovalForAll(
   fields: Partial<NftSetApprovalForAllOperation> &
     Pick<NftSetApprovalForAllOperation, "owner" | "operator_account">
 ): NftSetApprovalForAllOperation {
-  return withDefaults(fields, {
+  return {
     owner: fields.owner,
     operator_account: fields.operator_account,
-    collection: 0,
-    approved: true,
-  });
+    collection: fields.collection ?? 0,
+    approved: fields.approved ?? true,
+  };
 }
 
 export function nftBurn(
@@ -121,15 +110,15 @@ export function htlcCreate(
       "from" | "to" | "amount" | "preimage_hash" | "expiration"
     >
 ): HtlcCreateOperation {
-  return withDefaults(fields, {
+  return {
     from: fields.from,
     to: fields.to,
     amount: fields.amount,
     preimage_hash: fields.preimage_hash,
-    preimage_size: 0,
+    preimage_size: fields.preimage_size ?? 0,
     expiration: fields.expiration,
-    memo: "",
-  });
+    memo: fields.memo ?? "",
+  };
 }
 
 export function htlcRedeem(
@@ -164,26 +153,26 @@ export function contractDeploy(
   fields: Partial<ContractDeployOperation> &
     Pick<ContractDeployOperation, "owner" | "code_hash">
 ): ContractDeployOperation {
-  return withDefaults(fields, {
+  return {
     owner: fields.owner,
-    code: [],
+    code: fields.code ?? [],
     code_hash: fields.code_hash,
-    fuel_limit: 0,
-    init_args: [],
-  });
+    fuel_limit: fields.fuel_limit ?? 0,
+    init_args: fields.init_args ?? [],
+  };
 }
 
 export function contractCall(
   fields: Partial<ContractCallOperation> &
     Pick<ContractCallOperation, "caller" | "contract_id" | "export_name">
 ): ContractCallOperation {
-  return withDefaults(fields, {
+  return {
     caller: fields.caller,
     contract_id: fields.contract_id,
     export_name: fields.export_name,
-    args: [],
-    fuel_limit: 0,
-  });
+    args: fields.args ?? [],
+    fuel_limit: fields.fuel_limit ?? 0,
+  };
 }
 
 // ---------------------------------------------------------------------------

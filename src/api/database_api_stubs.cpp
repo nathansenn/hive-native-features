@@ -156,15 +156,8 @@ list_contracts_by_owner(const chain::database& db, const account_name_type& owne
       (void)id;
       if(c.owner != owner) continue;
       if(c.id < args.start) continue;
-      // list defaults to light (strip code) unless light=false explicitly requested
-      out.push_back(maybe_light_contract(c, args.light || true));
-      // Always strip code on list responses to avoid multi-MB payloads:
-      auto& back = out.back();
-      if(args.light || true) {
-         // Force strip: listing never returns WASM code blobs.
-         (void)args;
-         back.code.clear();
-      }
+      // Listing never returns WASM code blobs (always light for code field).
+      out.push_back(maybe_light_contract(c, /*light=*/true));
       if(out.size() >= lim) break;
    }
    return out;
