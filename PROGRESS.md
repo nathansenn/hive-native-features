@@ -133,3 +133,10 @@ cmake --build build -j
 
 1. **Phase 3h** — consensus activation design and shipping consensus WASM: **requires explicit human approval**.
 2. Hardfork numbers / activation schedule for each feature: TBD with upstream.
+
+## Performance program (2026-07-26)
+
+- Catalogue: `docs/performance/HIVE_1000_OPTIMIZATIONS.md` (1000 items)
+- P0 roadmap: `docs/performance/P0_ROADMAP.md`
+- Portable prototypes: `include/hive_native/perf/*` + `hive_native_perf_tests` (27 checks)
+- Verification: feature tests 165 pass; perf tests 27 pass; ctest 2/2
