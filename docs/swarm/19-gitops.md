@@ -4,24 +4,28 @@
 **Branch:** `phase-1-nft`  
 **Base:** `main`  
 **Date:** 2026-07-25  
-**Remote:** `origin` (`github.com:nathansenn/hive-native-features.git`)
+**Remote:** `origin` (`github.com:nathansenn/hive-native-features.git`)  
+**Tip:** `6335e9a2565aec91efd79e9debaac42bd2678ed7`
 
 ## Actions performed
 
 1. Waited 90s for concurrent swarm writers to finish.
 2. Confirmed `build/` is listed in `.gitignore` (not staged).
 3. Staged useful sources only; excluded `build/`.
-4. Created **3 logical commits** on `phase-1-nft`.
+4. Created logical commits on `phase-1-nft` (phase-0 ADRs, phase-1 library, docs).
 5. Pushed with `git push -u origin phase-1-nft` (no force-push).
 6. Opened PR against `main` (draft=false).
+7. Follow-up commits for gitops report + late swarm files.
 
-## Commit SHAs
+## Commit SHAs (`main..phase-1-nft`)
 
-| Order | Full SHA | Short | Subject |
-|------:|----------|-------|---------|
-| 1 | `9c925c3c6b4655464f5c021482c14d5df370bc60` | `9c925c3` | phase-0: lock ADRs and design decisions |
-| 2 | `7311fc890504518ad273f2008b8a652d695ef7c4` | `7311fc8` | phase-1: portable NFT+HTLC+contracts library with tests |
-| 3 | `f3fe296f0f30eeddac72e3ce356c8b3f40b4e6d6` | `f3fe296` | docs: swarm reports and upstream/migration guides |
+| Full SHA | Short | Subject |
+|----------|-------|---------|
+| `9c925c3c6b4655464f5c021482c14d5df370bc60` | `9c925c3` | phase-0: lock ADRs and design decisions |
+| `7311fc890504518ad273f2008b8a652d695ef7c4` | `7311fc8` | phase-1: portable NFT+HTLC+contracts library with tests |
+| `f3fe296f0f30eeddac72e3ce356c8b3f40b4e6d6` | `f3fe296` | docs: swarm reports and upstream/migration guides |
+| `143ef7a7eb441238633b084f717378bec901a791` | `143ef7a` | docs: gitops report with commit SHAs and PR URL |
+| `6335e9a2565aec91efd79e9debaac42bd2678ed7` | `6335e9a` | docs: remaining swarm reports and upstream integration notes |
 
 ## PR
 
@@ -39,9 +43,10 @@
 | Force-push | No |
 | Remote branch deleted | No |
 
-## Notes
+## Primary logical commits
 
-- Working tree was clean after the three content commits.
-- This file (`docs/swarm/19-gitops.md`) is a follow-up commit documenting the GitOps outcome (SHAs + PR URL).
-- Parent of branch tip before this doc: `f3fe296f0f30eeddac72e3ce356c8b3f40b4e6d6` (`docs: swarm…`).
-- Merge-base with `main`: `bfb97f7b07f106ab1ffac881423cc09e9196b80e`.
+1. **phase-0:** lock ADRs and design decisions — `9c925c3`
+2. **phase-1:** portable NFT+HTLC+contracts library with tests — `7311fc8`
+3. **docs:** swarm reports and upstream/migration guides — `f3fe296`
+
+Plus follow-ups: gitops report and remaining late swarm artifacts.
