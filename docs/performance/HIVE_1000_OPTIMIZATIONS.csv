@@ -1,0 +1,1001 @@
+id,priority,category,effort,status,title,source
+1,P0,storage,M,todo,Explicit template instantiation of top chainbase::generic_index<> specializations in dedicated .cpp files,catalogue
+2,P0,storage,M,todo,Split types.hpp into types_fwd.hpp / types_basic.hpp / types_operations.hpp to cut header tax,catalogue
+3,P0,storage,M,todo,Extern-template declarations for all fc::static_variant operation serializations,catalogue
+4,P0,storage,M,todo,Replace Boost.MultiIndex secondary indexes with absl::flat_hash_map or open-addressing for hot lookups,catalogue
+5,P1,storage,M,todo,Object-level bit-packing for account_object and comment_object,catalogue
+6,P0,storage,M,todo,Hybrid mode: consensus objects in SHM chainbase; non-consensus indexes in RocksDB + LRU,catalogue
+7,P1,storage,M,todo,Configurable pruning of comments older than N days on light nodes,catalogue
+8,P1,storage,M,partial-portable,Drop secondary indexes entirely on pruned / mobile nodes,catalogue
+9,P1,storage,M,partial-portable,Virtual-op retention limited to last M blocks in light mode,catalogue
+10,P1,storage,M,todo,Account-history pruning by activity score rather than pure age,catalogue
+11,P1,storage,M,todo,Adaptive shared-file-size with transparent huge-page advice,catalogue
+12,P1,storage,M,todo,madvise(MADV_HUGEPAGE/WILLNEED/DONTNEED) on chainbase regions,catalogue
+13,P0,storage,M,todo,Differential / incremental state snapshots (only changed objects),catalogue
+14,P1,storage,M,todo,Parallel snapshot generation across independent indexes,catalogue
+15,P1,storage,M,todo,Snapshot format using trained zstd dictionary on mainnet state,catalogue
+16,P1,storage,M,todo,Merkle-of-indexes verification for snapshots,catalogue
+17,P1,storage,M,todo,Multi-threaded index rebuild on snapshot load,catalogue
+18,P1,storage,M,todo,P2P snapshot object-exchange protocol for missing pieces,catalogue
+19,P1,storage,M,todo,Snapshot CDN / IPFS distribution optimized for mobile first-run,catalogue
+20,P1,storage,M,todo,Auto-snapshot on hardfork boundaries or every N blocks,catalogue
+21,P1,storage,M,todo,Omit recoverable data from snapshots to shrink size,catalogue
+22,P1,storage,M,todo,Resume from partial / corrupted snapshot,catalogue
+23,P0,storage,M,todo,RocksDB block cache sized to 20–30% of free RAM,catalogue
+24,P1,storage,M,todo,Bloom filters (10 bits/key) on account and comment column families,catalogue
+25,P1,storage,M,todo,write_buffer_size 64–128 MB during replay / bulk load,catalogue
+26,P1,storage,M,todo,"ZSTD for cold data, LZ4 for hot data in RocksDB",catalogue
+27,P1,storage,M,todo,Universal compaction for history-like column families,catalogue
+28,P1,storage,M,todo,Level-0 compaction trigger tuned for lower write amp on SSD,catalogue
+29,P1,storage,M,todo,Separate RocksDB instances/CFs per major plugin,catalogue
+30,P1,storage,M,todo,RocksDB statistics exposed via Prometheus,catalogue
+31,P1,storage,M,todo,Background compaction that yields immediately to block-apply,catalogue
+32,P0,storage,M,portable-prototype,Fast concurrent integrity (xxHash) without blocking readers,catalogue
+33,P1,storage,M,todo,Pure-RAM mode + periodic checkpoint for high-end witnesses,catalogue
+34,P1,storage,M,todo,Compressed block_log eras with per-era dictionaries,catalogue
+35,P1,storage,M,todo,On-the-fly block_log compression on low-priority thread,catalogue
+36,P1,storage,M,todo,O(1) random-access index into block_log by height,catalogue
+37,P1,storage,M,todo,Separate irreversible vs forkable block_log segments,catalogue
+38,P1,storage,M,todo,Erase old block_log after HAF has ingested it,catalogue
+39,P1,storage,M,todo,Memory-map recent block_log for fast catch-up,catalogue
+40,P1,storage,M,todo,xxHash checksums on block_log segments,catalogue
+41,P1,storage,M,todo,Parallel block_log write / sharding,catalogue
+42,P1,storage,M,todo,S3-compatible external object storage for cold segments,catalogue
+43,P0,storage,M,todo,Selective undo: track only changed fields not whole objects,catalogue
+44,P1,storage,M,todo,Compress undo-session data with zstd for deep forks,catalogue
+45,P1,storage,M,todo,Custom concurrent free-list allocator for undo sessions,catalogue
+46,P1,storage,M,todo,Larger chunk sizes in pool_allocator_t for account objects,catalogue
+47,P1,storage,M,todo,Reduce boost::intrusive::pointer_rebind instantiations via type erasure,catalogue
+48,P1,storage,M,todo,Flat containers for small stable indexes (witness schedule),catalogue
+49,P1,storage,M,todo,State-size estimation API for operator prune level choice,catalogue
+50,P1,storage,M,todo,Auto-prune when free disk falls below threshold,catalogue
+51,P1,storage,M,todo,Differential prune retaining only consensus-critical keys,catalogue
+52,P1,storage,M,todo,Synchronized HAF-side pruning policies,catalogue
+53,P1,storage,M,todo,Snapshot of already-pruned state for instant light-node start,catalogue
+54,P1,storage,M,todo,Benchmark suite quantifying prune vs full trade-offs,catalogue
+55,P1,storage,M,todo,Column-family-per-object-type layout in RocksDB,catalogue
+56,P1,storage,M,todo,Age-based partitioning of RocksDB data,catalogue
+57,P1,storage,M,todo,Concurrent readers via RCU or snapshot isolation on state DB,catalogue
+58,P1,storage,M,todo,mmap only hot objects; cold stay on disk,catalogue
+59,P1,storage,M,todo,Object lifetime analysis to move more data to stack/static,catalogue
+60,P1,storage,M,todo,In-place mutation for comment cashout instead of copy,catalogue
+61,P1,storage,M,todo,Batch multiple balance adjustments into one undo entry,catalogue
+62,P1,storage,M,todo,Avoid temporary string allocations in name lookups,catalogue
+63,P0,storage,M,todo,Primary-key caching for get_account / find_account,catalogue
+64,P1,storage,M,todo,Compress cold objects in-place in SHM with on-access decompress,catalogue
+65,P1,storage,M,todo,Memory-pressure feedback that shrinks caches or triggers prune,catalogue
+66,P1,storage,M,todo,std::pmr polymorphic allocators for protocol objects,catalogue
+67,P1,storage,M,todo,Lightweight allocation sampler in production builds,catalogue
+68,P1,storage,M,todo,Explicit huge-page allocation for shared-memory file,catalogue
+69,P1,storage,M,todo,madvise(MADV_DONTNEED) on cold regions after prune,catalogue
+70,P1,storage,M,todo,Operator scripts that enable transparent huge pages,catalogue
+71,P1,storage,M,todo,Resizable memory-mapped regions without full restart,catalogue
+72,P0,storage,M,todo,Per-thread arena allocators for temporary full_transaction objects,catalogue
+73,P1,storage,M,todo,Lock-free free lists for shared-memory object pools,catalogue
+74,P1,storage,M,todo,Reduce shared_ptr traffic in full_block / full_transaction via views,catalogue
+75,P1,storage,M,todo,Custom deleters that return objects to pools,catalogue
+76,P1,storage,M,todo,Pre-allocate pending-transaction structures,catalogue
+77,P1,storage,M,todo,Small-string optimization awareness for protocol string fields,catalogue
+78,P1,storage,M,todo,Vectorized processing of batches of similar objects,catalogue
+79,P1,storage,M,todo,State DB checksum concurrent with apply,catalogue
+80,P1,storage,M,todo,Optional encrypted-at-rest for state on untrusted hosts,catalogue
+81,P1,storage,M,todo,Adaptive shared-file growth prediction from account creation rate,catalogue
+82,P1,storage,M,todo,Separate hot/cold partitions inside chainbase,catalogue
+83,P1,storage,M,todo,Background compaction threads with strict latency budgets,catalogue
+84,P1,storage,M,portable-prototype,Fast integrity hashes (xxHash) instead of slower CRCs where possible,catalogue
+85,P1,storage,M,todo,Snapshot distribution with progressive download + verification,catalogue
+86,P1,storage,M,todo,Tooling to convert between full and pruned snapshot formats,catalogue
+87,P1,storage,M,todo,Support for multiple concurrent snapshot formats (legacy + new),catalogue
+88,P1,storage,M,todo,Automatic snapshot integrity self-test on load,catalogue
+89,P1,storage,M,partial-portable,Prune virtual ops by type (keep only high-value),catalogue
+90,P1,storage,M,todo,Configurable retention windows per object type,catalogue
+91,P1,storage,M,todo,State growth forecasting metrics,catalogue
+92,P1,storage,M,todo,Disk I/O scheduler hints for sequential block_log access,catalogue
+93,P1,storage,M,todo,Wear-leveling-aware write patterns for flash,catalogue
+94,P1,storage,M,todo,Zoned storage / SMR drives for archival block_log,catalogue
+95,P1,storage,M,todo,Expand external storage provider interface,catalogue
+96,P1,storage,M,todo,RocksDB WAL tuning for lower latency,catalogue
+97,P1,storage,M,todo,Disable RocksDB WAL for pure-replay scenarios,catalogue
+98,P1,storage,M,todo,Memory-budgeting coordinating chainbase + RocksDB + plugins,catalogue
+99,P1,storage,M,todo,Automatic fallback from SHM to process memory on low-RAM devices,catalogue
+100,P1,storage,M,todo,Compressed undo history for rare deep-reorg case,catalogue
+101,P2,storage,S,todo,Per-index bit-packing strategy for comment_index,expanded
+102,P2,storage,S,todo,Per-index bit-packing for account_authority_object,expanded
+103,P2,storage,S,todo,"RocksDB preset: NVMe witness (high cache, LZ4 hot)",expanded
+104,P2,storage,S,todo,"RocksDB preset: eMMC mobile (small cache, ZSTD, lower L0)",expanded
+105,P2,storage,S,todo,"RocksDB preset: HDD archive (large write buffer, universal compact)",expanded
+106,P2,storage,S,todo,Snapshot differential encoding: XOR of packed objects,expanded
+107,P2,storage,S,todo,Snapshot differential encoding: content-defined chunking,expanded
+108,P2,storage,S,todo,Snapshot differential encoding: index-level CRC + delta pages,expanded
+109,P2,storage,S,todo,Prune policy: social data (comments/votes) aggressive,expanded
+110,P2,storage,S,todo,Prune policy: financial data (balances/transfers) conservative,expanded
+111,P2,storage,S,todo,Prune policy: NFT objects retain owners-only on light nodes,expanded
+112,P2,storage,S,todo,Prune policy: HTLC open-only on pruned nodes,expanded
+113,P2,storage,S,todo,Allocator pool auto-tune from object size histograms,expanded
+114,P2,storage,S,todo,Allocator pool size auto-tune from allocation rate,expanded
+115,P2,storage,S,todo,SHM region split: accounts hot / comments warm / history cold,expanded
+116,P2,storage,S,todo,Object packing: pack bools into bitfields in account_object,expanded
+117,P2,storage,S,todo,Object packing: fixed-width asset fields,expanded
+118,P2,storage,S,todo,Object packing: interned account_name_type ids,expanded
+119,P2,storage,S,todo,Object packing: 32-bit relative block heights where safe,expanded
+120,P2,storage,S,todo,Index rebuild skip flags for non-consensus secondary keys,expanded
+121,P2,storage,S,todo,Light snapshot: accounts + global props only,expanded
+122,P2,storage,S,todo,Light snapshot: + open HTLCs + NFT owners,expanded
+123,P2,storage,S,todo,Archive snapshot: full history with external blob refs,expanded
+124,P2,storage,S,todo,Chainbase page-fault tracing for cold/hot classification,expanded
+125,P2,storage,S,todo,Prefetch next N account objects on transfer batch,expanded
+126,P2,storage,S,todo,Prefetch comment tree on cashout window,expanded
+127,P2,storage,S,todo,Prefetch witness schedule each block,expanded
+128,P2,storage,S,todo,SHM fragmentation defrag offline tool,expanded
+129,P2,storage,S,todo,SHM fragmentation online compact on prune,expanded
+130,P2,storage,S,todo,RocksDB secondary instance for read-only API nodes,expanded
+131,P2,storage,S,todo,RocksDB CF: account_history with TTL,expanded
+132,P2,storage,S,todo,RocksDB CF: market_history with TTL,expanded
+133,P2,storage,S,todo,RocksDB CF: block_log index,expanded
+134,P2,storage,S,todo,RocksDB CF: contract storage (plugin),expanded
+135,P2,storage,S,todo,xxHash64 for object integrity in tests,expanded
+136,P2,storage,S,todo,xxHash3 for snapshot piece verification,expanded
+137,P2,storage,S,todo,CRC32C hardware for block_log if available else xxHash,expanded
+138,P2,storage,S,todo,Snapshot piece size tuned to 4MB mobile MTU path,expanded
+139,P2,storage,S,todo,Snapshot piece size tuned to 64MB server CDN,expanded
+140,P2,storage,S,todo,P2P snapshot piece rarity-first download,expanded
+141,P2,storage,S,todo,Prune dry-run mode reporting reclaimable bytes,expanded
+142,P2,storage,S,todo,Prune by irreversible height watermark,expanded
+143,P2,storage,S,todo,Prune coordinated with last HAF irreversible,expanded
+144,P2,storage,S,todo,State size estimator by multi_index sizeof * count,expanded
+145,P2,storage,S,todo,State size estimator sampling average object length,expanded
+146,P2,storage,S,todo,Cold object compress threshold auto-tune,expanded
+147,P2,storage,S,todo,madvise SEQUENTIAL on block_log replay,expanded
+148,P2,storage,S,todo,madvise RANDOM on random account lookups mmap,expanded
+149,P2,storage,S,todo,Transparent huge pages only on SHM file not process heap,expanded
+150,P2,storage,S,todo,Fallback 2MB explicit huge pages if THP unavailable,expanded
+151,P0,apply,L,portable-prototype,Expand blockchain_worker_thread_pool to independent op evaluation via dependency analysis,catalogue
+152,P0,apply,L,todo,Add apply priority queue to existing high/medium/low lock-free queues,catalogue
+153,P0,apply,L,todo,Dynamic thread-pool sizing from hardware_concurrency and load,catalogue
+154,P1,apply,L,todo,Work-stealing queues in addition to lock-free design,catalogue
+155,P1,apply,L,todo,"Separate pools for crypto, I/O, apply, and indexing",catalogue
+156,P1,apply,L,todo,CPU affinity for worker threads,catalogue
+157,P1,apply,L,todo,Expand pool coverage to account_history_rocksdb writes,catalogue
+158,P1,apply,L,todo,Expand pool to background state-snapshot generation,catalogue
+159,P1,apply,L,todo,Expand pool to sql_serializer batching,catalogue
+160,P1,apply,L,todo,Task batching of small operations into larger work items,catalogue
+161,P1,apply,L,todo,Cancellation of low-priority tasks when high-priority work arrives,catalogue
+162,P1,apply,L,todo,Queue-depth / wait-time / task-latency metrics per priority,catalogue
+163,P1,apply,L,todo,Inline fallback when the pool is saturated,catalogue
+164,P1,apply,L,todo,NUMA-local work queues,catalogue
+165,P1,apply,L,todo,Priority inheritance for critical-path tasks,catalogue
+166,P1,apply,L,todo,Hybrid io_uring + thread-pool completion,catalogue
+167,P1,apply,L,todo,C++20 coroutine tasks on top of the pool,catalogue
+168,P1,apply,L,todo,Speculative parallel validation of multiple candidate blocks,catalogue
+169,P1,apply,L,todo,Parallel independent multi-index updates after apply,catalogue
+170,P1,apply,L,todo,Parallel plugin notify handlers with isolation,catalogue
+171,P1,apply,L,todo,Configurable max concurrency for internal apply phases,catalogue
+172,P1,apply,L,todo,Specialize _apply_block for skip-flag combinations at compile time,catalogue
+173,P0,apply,L,todo,Fast path for empty or low-operation-count blocks,catalogue
+174,P1,apply,L,todo,Batch process_comment_cashout across comments,catalogue
+175,P1,apply,L,todo,Parallelize independent process_funds / process_conversions,catalogue
+176,P0,apply,L,todo,Cache get_dynamic_global_properties results inside a single block,catalogue
+177,P1,apply,L,todo,Filter inactive plugins before notify_pre_apply / post_apply,catalogue
+178,P0,apply,L,todo,"Inline the hottest evaluators (vote, transfer, custom_json)",catalogue
+179,P0,apply,L,todo,Pre-compute authorities for repeated signers inside a block,catalogue
+180,P1,apply,L,todo,Priority-queue data structures for clear_expired_* methods,catalogue
+181,P1,apply,L,todo,Lazy retally_witness_votes only when required,catalogue
+182,P1,apply,L,todo,Incremental hardfork application,catalogue
+183,P1,apply,L,todo,Skip header validation for locally produced blocks,catalogue
+184,P0,apply,L,todo,Reduce shared_ptr copies on the apply path,catalogue
+185,P0,apply,L,todo,Aggressive move semantics for full_transaction,catalogue
+186,P1,apply,L,todo,Specialized fast-confirm vs normal apply paths,catalogue
+187,P1,apply,L,todo,Batch adjust_balance calls inside one transaction,catalogue
+188,P1,apply,L,todo,Calendar indexing for process_recurrent_transfers,catalogue
+189,P1,apply,L,todo,Incremental median structures for update_median_feed,catalogue
+190,P1,apply,L,todo,Lower-cost pop_block via more efficient undo,catalogue
+191,P1,apply,L,todo,Parallel clear_pending where safe,catalogue
+192,P1,apply,L,todo,Profile-driven specialization of the top 10 operation evaluators,catalogue
+193,P1,apply,L,todo,Generated specialized code paths for each of the 66 operations,catalogue
+194,P1,apply,L,todo,Filtered / lazy virtual-op emission under load,catalogue
+195,P1,apply,L,todo,More granular skip flags for replay,catalogue
+196,P1,apply,L,todo,More frequent irreversible checkpoints,catalogue
+197,P1,apply,L,todo,Faster initialize_indexes on startup,catalogue
+198,P1,apply,L,todo,Vectorized processing of batches of identical op types,catalogue
+199,P0,apply,L,todo,Parallel pre-validation of mempool transactions,catalogue
+200,P1,apply,L,todo,Adaptive mempool size limits based on RAM,catalogue
+201,P1,apply,L,todo,Evict lowest-RC transactions first under pressure,catalogue
+202,P1,apply,L,todo,Pre-apply cost estimation for large transactions,catalogue
+203,P1,apply,L,todo,Cache validation results for identical transactions,catalogue
+204,P0,apply,L,portable-prototype,Bloom / compact-set for is_known_transaction,catalogue
+205,P0,apply,L,todo,Separate validation thread pool from apply,catalogue
+206,P1,apply,L,todo,Speculative inclusion of high-confidence transactions,catalogue
+207,P1,apply,L,todo,Optimized parsing for large custom_json,catalogue
+208,P1,apply,L,todo,Specialized post-HF28 paths for claim/create account,catalogue
+209,P0,apply,L,todo,SIMD / NEON acceleration for vote-weight and common arithmetic,catalogue
+210,P0,apply,L,todo,Faster Merkle-root and block-ID computation,catalogue
+211,P1,apply,L,todo,Cache deserialised full_transaction across P2P and apply,catalogue
+212,P1,apply,L,todo,Skip redundant authority checks after successful mempool validation,catalogue
+213,P1,apply,L,todo,Profile-guided inlining and de-virtualization of evaluators,catalogue
+214,P1,apply,L,todo,Configurable apply-parallelism exposed to operators,catalogue
+215,P1,apply,L,todo,Micro-optimizations for common multi-sig patterns,catalogue
+216,P0,apply,L,partial-portable,Batch RC deduction / refund,catalogue
+217,P1,apply,L,todo,Pre-validate transactions more aggressively before inclusion,catalogue
+218,P1,apply,L,todo,Reduce virtual-op generation for low-value ops under load,catalogue
+219,P0,apply,L,portable-prototype,Arena / pool allocation for all temporary apply data,catalogue
+220,P1,apply,L,todo,Speculative execution of the predicted next block,catalogue
+221,P2,apply,M,todo,Specialize evaluator: vote_operation hot path,expanded
+222,P2,apply,M,todo,Specialize evaluator: transfer_operation hot path,expanded
+223,P2,apply,M,todo,Specialize evaluator: custom_json_operation hot path,expanded
+224,P2,apply,M,todo,Specialize evaluator: comment_operation hot path,expanded
+225,P2,apply,M,todo,Specialize evaluator: limit_order hot path,expanded
+226,P2,apply,M,todo,Specialize evaluator: claim_account / create_claimed_account post-HF28,expanded
+227,P2,apply,M,todo,Specialize evaluator: recurrent_transfer,expanded
+228,P2,apply,M,todo,Specialize evaluator: escrow ops,expanded
+229,P2,apply,M,todo,Specialize evaluator: witness_update,expanded
+230,P2,apply,M,todo,Specialize evaluator: account_update,expanded
+231,P2,apply,M,todo,Skip flag combo: replay-no-plugins,expanded
+232,P2,apply,M,todo,Skip flag combo: replay-no-virtual-ops,expanded
+233,P2,apply,M,todo,Skip flag combo: replay-authority-cached,expanded
+234,P2,apply,M,todo,Skip flag combo: light-node-no-comments,expanded
+235,P2,apply,M,todo,Skip flag combo: mobile-headers-only-validate,expanded
+236,P2,apply,M,todo,Mempool eviction: lowest RC first,expanded
+237,P2,apply,M,todo,Mempool eviction: oldest first under age cap,expanded
+238,P2,apply,M,todo,Mempool eviction: largest custom_json first under RAM pressure,expanded
+239,P2,apply,M,todo,Mempool eviction: non-witness txs first on producer nodes,expanded
+240,P2,apply,M,todo,Mempool eviction: score = RC_cost / size priority,expanded
+241,P2,apply,M,todo,SIMD target: x86_64 AVX2 vote weight,expanded
+242,P2,apply,M,todo,SIMD target: aarch64 NEON vote weight,expanded
+243,P2,apply,M,todo,SIMD target: batch ED25519/secp if adopted paths,expanded
+244,P2,apply,M,todo,SIMD target: parallel SHA-256 of tx digests,expanded
+245,P2,apply,M,todo,SIMD target: parallel RIPEMD160 for address-like hashes,expanded
+246,P2,apply,M,todo,Apply phase: parallel sig verify only,expanded
+247,P2,apply,M,todo,Apply phase: parallel JSON parse only,expanded
+248,P2,apply,M,todo,Apply phase: serial state mutation with dependency graph,expanded
+249,P2,apply,M,todo,Apply phase: post-apply parallel index maintenance,expanded
+250,P2,apply,M,todo,Apply phase: post-apply parallel virtual op emit,expanded
+251,P2,apply,M,todo,Dependency graph: account-level serialization,expanded
+252,P2,apply,M,todo,Dependency graph: object-id serialization,expanded
+253,P2,apply,M,todo,Dependency graph: global props single-writer,expanded
+254,P2,apply,M,todo,Dependency graph: witness schedule single-writer,expanded
+255,P2,apply,M,todo,Dependency graph: allow parallel distinct NFT transfers,expanded
+256,P2,apply,M,todo,Dependency graph: allow parallel distinct HTLC redeems,expanded
+257,P2,apply,M,todo,Inline path: empty block finalize only,expanded
+258,P2,apply,M,todo,Inline path: single-tx block,expanded
+259,P2,apply,M,todo,Inline path: all-transfer block vectorized,expanded
+260,P2,apply,M,todo,Inline path: all-vote block vectorized,expanded
+261,P2,apply,M,todo,Cache: recent block merkle intermediate nodes,expanded
+262,P2,apply,M,todo,Cache: witness key set for 21 schedule,expanded
+263,P2,apply,M,todo,Cache: RC curves per resource type,expanded
+264,P2,apply,M,todo,Cache: hardfork feature flags bitset,expanded
+265,P2,apply,M,todo,Arena: per-block bump allocator,expanded
+266,P2,apply,M,todo,Arena: per-tx bump allocator,expanded
+267,P2,apply,M,todo,Arena: per-plugin notify allocator,expanded
+268,P2,apply,M,todo,PGO profile: mainnet apply 1h workload,expanded
+269,P2,apply,M,todo,PGO profile: social-heavy synthetic,expanded
+270,P2,apply,M,todo,PGO profile: defi-heavy synthetic,expanded
+271,P2,apply,M,todo,Bench gate: apply p99 vs transfer baseline,expanded
+272,P2,apply,M,todo,Bench gate: block full-apply wall time budget,expanded
+273,P2,apply,M,todo,Bench gate: mempool validate TPS,expanded
+274,P2,apply,M,todo,Speculative next-block cancel on fork,expanded
+275,P2,apply,M,todo,Speculative next-block commit only if matches,expanded
+276,P2,apply,M,todo,Worker pool: apply-priority over snapshot,expanded
+277,P2,apply,M,todo,Worker pool: crypto-priority over history write,expanded
+278,P2,apply,M,todo,Worker pool: saturation metrics to Prometheus,expanded
+279,P2,apply,M,todo,Worker pool: auto-shrink on thermal/mobile,expanded
+280,P2,apply,M,todo,Worker pool: pin apply threads to big cores,expanded
+281,P2,apply,M,todo,Worker pool: pin history I/O to little cores,expanded
+282,P2,apply,M,todo,Virtual op: suppress low-value under load flag,expanded
+283,P2,apply,M,todo,Virtual op: always emit financial ops,expanded
+284,P2,apply,M,todo,Virtual op: sample social ops 1:N under load,expanded
+285,P2,apply,M,todo,Hardfork apply: batch state migrations,expanded
+286,P2,apply,M,todo,Hardfork apply: background index rebuild,expanded
+287,P2,apply,M,todo,pop_block: field-level undo when available,expanded
+288,P2,apply,M,todo,pop_block: parallel free of session nodes,expanded
+289,P2,apply,M,todo,clear_expired: calendar wheel by second,expanded
+290,P2,apply,M,todo,clear_expired: calendar wheel by block,expanded
+291,P2,apply,M,todo,recurrent_transfer: next-due min-heap,expanded
+292,P2,apply,M,todo,median_feed: sliding window deque,expanded
+293,P2,apply,M,todo,authority: prehash pubkey ids in block,expanded
+294,P2,apply,M,todo,authority: cache account auth for block lifetime,expanded
+295,P2,apply,M,todo,custom_json: size-classed parsers,expanded
+296,P2,apply,M,todo,custom_json: schema-known id fast path,expanded
+297,P2,apply,M,todo,Merkle: incremental root with tx stream,expanded
+298,P2,apply,M,todo,Merkle: BLAKE3 experiment non-consensus research,expanded
+299,P2,apply,M,todo,Known-tx: cuckoo filter,expanded
+300,P2,apply,M,todo,Known-tx: blocked-bloom dual filter,expanded
+301,P0,p2p,M,todo,Compact-block relay using short transaction IDs + fill requests,catalogue
+302,P1,p2p,M,todo,BIP152-style compact blocks with prefilled high-priority transactions,catalogue
+303,P0,p2p,M,todo,Optional QUIC transport (msquic / quiche) with TCP fallback,catalogue
+304,P1,p2p,M,todo,UDP unreliable transport for block announcements only,catalogue
+305,P1,p2p,M,todo,"Adaptive compression (zstd blocks, snappy txs, none for small inv)",catalogue
+306,P1,p2p,M,todo,Peer bandwidth estimation and dynamic allocation,catalogue
+307,P1,p2p,M,todo,Dedicated high-priority witness-to-witness channels,catalogue
+308,P1,p2p,M,todo,Full IPv6 + Happy Eyeballs,catalogue
+309,P1,p2p,M,todo,STUN/TURN/ICE for NAT traversal (mobile/residential),catalogue
+310,P1,p2p,M,todo,Kademlia-style DHT for peer discovery,catalogue
+311,P1,p2p,M,todo,DNS SRV seeds,catalogue
+312,P1,p2p,M,todo,Peer scoring by propagation latency + uptime + version,catalogue
+313,P1,p2p,M,todo,Soft-ban / hard-ban for invalid blocks,catalogue
+314,P1,p2p,M,todo,Rate-limit inv while allowing unlimited blocks from trusted peers,catalogue
+315,P1,p2p,M,todo,Bloom / Golomb-coded set reconciliation for mempool sync,catalogue
+316,P1,p2p,M,todo,Batched `get_transactions`,catalogue
+317,P1,p2p,M,todo,RC-aware or size-aware transaction relay prioritization,catalogue
+318,P1,p2p,M,todo,Connection multiplexing / multiple streams over one transport,catalogue
+319,P1,p2p,M,todo,HTTP/3 for API and WebSocket paths,catalogue
+320,P1,p2p,M,todo,Mobile-aware keep-alives,catalogue
+321,P1,p2p,M,todo,Peer rotation that preserves good peers while avoiding eclipse,catalogue
+322,P1,p2p,M,todo,Geographic / latency-based peer preference,catalogue
+323,P0,p2p,M,todo,Headers-first then body-on-demand for light peers,catalogue
+324,P1,p2p,M,todo,DoS-resistant connection limits per IP/subnet,catalogue
+325,P1,p2p,M,todo,Granular message-size limits by type,catalogue
+326,P1,p2p,M,todo,Fast reconnect after flaps,catalogue
+327,P1,p2p,M,todo,"Prometheus metrics for peer latency histograms, bytes, bans",catalogue
+328,P1,p2p,M,todo,Configurable max connections scaled by RAM,catalogue
+329,P1,p2p,M,todo,Zero-copy fast path for localhost / same-machine P2P,catalogue
+330,P0,p2p,M,todo,Unix-domain sockets for co-located HAF + hived,catalogue
+331,P1,p2p,M,todo,“I am a mobile node” capability flag,catalogue
+332,P1,p2p,M,todo,Reduced heartbeat for long-lived good peers,catalogue
+333,P1,p2p,M,todo,Parallel header download for initial sync,catalogue
+334,P1,p2p,M,todo,Optional trusted-checkpoint sync mode,catalogue
+335,P1,p2p,M,todo,RTT-aware retransmission,catalogue
+336,P1,p2p,M,todo,Multipath QUIC / MPTCP support,catalogue
+337,P1,p2p,M,todo,Persistent peer reputation across restarts,catalogue
+338,P1,p2p,M,todo,External bootstrap / discovery service integration,catalogue
+339,P1,p2p,M,todo,Aggressive size limits on relayed `custom_json`,catalogue
+340,P1,p2p,M,todo,Separate relay policy for high-volume social ops,catalogue
+341,P1,p2p,M,todo,Compressed peer-address lists in handshakes,catalogue
+342,P1,p2p,M,todo,Preferred-peers list for operators,catalogue
+343,P1,p2p,M,todo,Soft version enforcement / upgrade prompts,catalogue
+344,P1,p2p,M,todo,Block-propagation simulation tools,catalogue
+345,P1,p2p,M,todo,"Built-in chaos testing (drop, delay, partition)",catalogue
+346,P1,p2p,M,todo,End-to-end production-to-irreversible latency measurement,catalogue
+347,P1,p2p,M,todo,Prefer SSD-backed peers for history,catalogue
+348,P1,p2p,M,todo,Content-addressable hints for large payloads,catalogue
+349,P1,p2p,M,todo,Zero-RTT QUIC resumption,catalogue
+350,P1,p2p,M,todo,“Slow peer” mode that throttles instead of bans,catalogue
+351,P1,p2p,M,todo,Dual-stack listening and advertising,catalogue
+352,P1,p2p,M,todo,Rate-controlled peer exchange (PEX),catalogue
+353,P1,p2p,M,todo,Optional authenticated channels via Hive keys,catalogue
+354,P1,p2p,M,todo,Geographic sharding of connections,catalogue
+355,P1,p2p,M,todo,Priority queues for outgoing messages,catalogue
+356,P1,p2p,M,todo,Amplification-attack mitigation,catalogue
+357,P1,p2p,M,todo,Configurable max blocks-in-flight per peer,catalogue
+358,P1,p2p,M,todo,Dynamic push vs pull policy,catalogue
+359,P1,p2p,M,todo,Dynamic seed-list updates via API,catalogue
+360,P1,p2p,M,todo,"Low-power P2P mode (fewer connections, longer intervals)",catalogue
+361,P1,p2p,M,todo,Inventory bloom-filter exchange,catalogue
+362,P1,p2p,M,todo,Block reconstruction from compact + local mempool,catalogue
+363,P1,p2p,M,todo,Latency-based peer selection (<50 ms preferred),catalogue
+364,P1,p2p,M,todo,Bandwidth throttling by peer class,catalogue
+365,P1,p2p,M,todo,Automatic pruning of unreachable peers,catalogue
+366,P1,p2p,M,todo,WebRTC data channels for browser light nodes,catalogue
+367,P1,p2p,M,todo,Message prioritization queues (blocks > txs > history),catalogue
+368,P1,p2p,M,todo,Adaptive outstanding-request windows,catalogue
+369,P1,p2p,M,todo,Sybil behavioral detection,catalogue
+370,P1,p2p,M,todo,Prefer same-or-newer version peers,catalogue
+371,P1,p2p,M,todo,Parallel body download (rarest-first),catalogue
+372,P1,p2p,M,todo,Seed health monitoring and auto-update,catalogue
+373,P1,p2p,M,todo,Feature-bit protocol negotiation,catalogue
+374,P1,p2p,M,todo,Back-pressure when local apply lags,catalogue
+375,P1,p2p,M,todo,Separate ports/interfaces for P2P vs API,catalogue
+376,P1,p2p,M,todo,`SO_REUSEPORT` for multi-threaded accept,catalogue
+377,P1,p2p,M,todo,`TCP_NODELAY` + tuned buffers for witnesses,catalogue
+378,P1,p2p,M,todo,Explicit congestion control (BBR),catalogue
+379,P1,p2p,M,todo,Anomaly-only P2P logging in production,catalogue
+380,P1,p2p,M,todo,FEC for lossy links,catalogue
+381,P1,p2p,M,todo,Peer capability advertisement,catalogue
+382,P1,p2p,M,todo,Automatic best-transport selection per peer,catalogue
+383,P1,p2p,M,todo,Rate limits derived from measured peer bandwidth,catalogue
+384,P1,p2p,M,todo,Witness-only preferential connectivity mode,catalogue
+385,P1,p2p,M,todo,Pre-verification of block signatures in P2P thread,catalogue
+386,P1,p2p,M,todo,Efficient varint inventory serialization,catalogue
+387,P1,p2p,M,todo,Delta encoding of repeated addresses,catalogue
+388,P1,p2p,M,todo,Local-network multicast / discovery,catalogue
+389,P1,p2p,M,todo,systemd socket activation,catalogue
+390,P1,p2p,M,todo,DSCP / TOS marking for prioritization,catalogue
+391,P1,p2p,M,todo,High-bandwidth (10 G+) window tuning,catalogue
+392,P1,p2p,M,todo,Middlebox interference detection + fallback,catalogue
+393,P1,p2p,M,todo,Proof-of-possession requests for light peers,catalogue
+394,P1,p2p,M,todo,Compressed headers-only initial sync,catalogue
+395,P1,p2p,M,todo,Parallel multi-source header validation,catalogue
+396,P1,p2p,M,todo,Gossip of bad-peer ban lists among trusted nodes,catalogue
+397,P1,p2p,M,todo,Private-network authenticated channels,catalogue
+398,P1,p2p,M,todo,Orphan / duplicate / bandwidth-efficiency metrics,catalogue
+399,P1,p2p,M,todo,Adaptive `max_inv_size`,catalogue
+400,P2,p2p,M,todo,Prefer peers with higher last-irreversible,catalogue
+401,P2,p2p,M,todo,Archive-node capability flag + preferential history serving,catalogue
+402,P2,p2p,M,todo,Load-balanced history requests,catalogue
+403,P2,p2p,M,todo,RTT-multiplied timeouts,catalogue
+404,P2,p2p,M,todo,Exponential backoff with jitter,catalogue
+405,P2,p2p,M,todo,Persistent connection cache,catalogue
+406,P2,p2p,M,todo,SOCKS / proxy support,catalogue
+407,P2,p2p,M,todo,IPv6-only mode,catalogue
+408,P2,p2p,M,todo,Network-simulation test harness,catalogue
+409,P2,p2p,M,todo,Chaos-engineering hooks,catalogue
+410,P2,p2p,M,todo,Bandwidth documentation per node type,catalogue
+411,P2,p2p,M,todo,BDP-based socket-buffer auto-tuning,catalogue
+412,P2,p2p,M,todo,Multi-homing / multiple listen addresses,catalogue
+413,P2,p2p,M,todo,ASN / regional diversity requirements,catalogue
+414,P2,p2p,M,todo,External Prometheus peer exporter,catalogue
+415,P2,p2p,M,todo,Compact peer-state structures,catalogue
+416,P2,p2p,M,todo,Lazy connection for low-priority peers,catalogue
+417,P2,p2p,M,todo,"“Push blocks, pull txs” policy",catalogue
+418,P2,p2p,M,todo,High-churn mobile peer isolation,catalogue
+419,P2,p2p,M,todo,Forward-compatible protocol versioning,catalogue
+420,P2,p2p,M,todo,Comprehensive P2P message fuzzing,catalogue
+421,P0,concurrency,M,todo,Fine-grained per-index RW locks,catalogue
+422,P2,concurrency,M,todo,"RCU for read-mostly indexes (account name, etc.)",catalogue
+423,P2,concurrency,M,todo,Epoch-based reclamation,catalogue
+424,P0,concurrency,M,todo,Lock-free hash for hottest account lookups,catalogue
+425,P2,concurrency,M,todo,Seqlocks for simple global properties,catalogue
+426,P2,concurrency,M,todo,Prepare data outside locks to shrink critical sections,catalogue
+427,P2,concurrency,M,todo,Lock-free queues for plugin handler dispatch,catalogue
+428,P2,concurrency,M,todo,Strict lock hierarchy documentation + enforcement,catalogue
+429,P2,concurrency,M,todo,TSan-clean CI builds,catalogue
+430,P2,concurrency,M,todo,Optional single-threaded mode for debug / low-core,catalogue
+431,P2,concurrency,M,todo,Concurrent multi-peer block validation with fork-DB isolation,catalogue
+432,P2,concurrency,M,todo,Async `flush_to_all_storages` with completion,catalogue
+433,P2,concurrency,M,todo,Concurrent snapshot readers,catalogue
+434,P2,concurrency,M,todo,Lock-free pending-transaction index where feasible,catalogue
+435,P2,concurrency,M,todo,Atomic counters for head-block / simple stats,catalogue
+436,P2,concurrency,M,todo,Hazard pointers for safe concurrent free,catalogue
+437,P2,concurrency,M,todo,Hardware transactional memory experiments,catalogue
+438,P2,concurrency,M,todo,Reduced atomic ref-count traffic,catalogue
+439,P2,concurrency,M,todo,Document concurrent-access rules for plugin authors,catalogue
+440,P2,concurrency,S,todo,RCU for account-by-name index reads,expanded
+441,P2,concurrency,S,todo,RCU for witness schedule snapshot,expanded
+442,P2,concurrency,S,todo,Seqlock for dynamic_global_property_object,expanded
+443,P2,concurrency,S,todo,Per-index shared_mutex replacing global chain lock slices,expanded
+444,P2,concurrency,S,todo,False-sharing elimination on atomic counters,expanded
+445,P2,concurrency,S,todo,Cache-line align worker queue nodes,expanded
+446,P2,concurrency,S,todo,NUMA topology discovery at startup,expanded
+447,P2,concurrency,S,todo,Core-pinning policy JSON config,expanded
+448,P2,concurrency,S,todo,Hazard pointer free of index nodes,expanded
+449,P2,concurrency,S,todo,Epoch reclamation for multi-index erase,expanded
+450,P2,concurrency,S,todo,Lock-free SPSC for plugin virtual ops,expanded
+451,P2,concurrency,S,todo,Lock-free MPSC for P2P inbound,expanded
+452,P2,concurrency,S,todo,Arena per-thread for temporary strings,expanded
+453,P2,concurrency,S,todo,Oversubscription control when tasks > cores,expanded
+454,P2,concurrency,S,todo,TSan suppressions audit for false positives,expanded
+455,P2,concurrency,S,todo,Document lock order: p2p < mempool < chain < plugins,expanded
+456,P2,concurrency,S,todo,Single-thread debug mode CLI flag,expanded
+457,P2,concurrency,S,todo,Concurrent fork-DB candidate validation slots,expanded
+458,P2,concurrency,S,todo,Async flush completion future API,expanded
+459,P2,concurrency,S,todo,Atomic head_block_num with acquire/release,expanded
+460,P2,concurrency,S,todo,Reduce shared_ptr atomic ops via intrusive_ptr experiment,expanded
+461,P2,concurrency,S,todo,Prepare undo nodes outside write lock,expanded
+462,P2,concurrency,S,todo,Batch index insert under single lock acquisition,expanded
+463,P2,concurrency,S,todo,Reader-writer for account_history rocksdb,expanded
+464,P2,concurrency,S,todo,Copy-on-write page for rare global props updates,expanded
+465,P2,concurrency,S,todo,HTM (hardware transactional memory) research gate,expanded
+466,P2,concurrency,S,todo,Parallel snapshot readers with refcounted roots,expanded
+467,P2,concurrency,S,todo,Pending tx index sharded by txid prefix,expanded
+468,P2,concurrency,S,todo,Shard account locks by name hash 256 ways,expanded
+469,P2,concurrency,S,todo,Shard comment locks by author/permlink hash,expanded
+470,P2,concurrency,S,todo,Work-stealing deques per NUMA node,expanded
+471,P2,concurrency,S,todo,Backpressure when apply queue > threshold,expanded
+472,P2,concurrency,S,todo,Priority ceiling for irreversible finalize,expanded
+473,P2,concurrency,S,todo,Avoid lock in get_dynamic_global_properties if seqlock,expanded
+474,P2,concurrency,S,todo,Double-buffer plugin state for concurrent notify,expanded
+475,P2,concurrency,S,todo,Memory order audit of atomics,expanded
+476,P2,concurrency,S,todo,Pause-less free list for small objects,expanded
+477,P2,concurrency,S,todo,Thread-local cache of account_object* for hot names,expanded
+478,P2,concurrency,S,todo,Striped locks for RC mana updates,expanded
+479,P2,concurrency,S,todo,Striped locks for balances,expanded
+480,P2,concurrency,S,todo,Apply thread parking with futex,expanded
+481,P2,concurrency,S,todo,io_uring for RocksDB flush completions,expanded
+482,P2,concurrency,S,todo,Coroutine transform for async API,expanded
+483,P2,concurrency,S,todo,Fiber experiment for plugin handlers,expanded
+484,P2,concurrency,S,todo,Bounded channel for sql_serializer batches,expanded
+485,P2,concurrency,S,todo,Deadlock detector sampling in debug,expanded
+486,P2,concurrency,S,todo,Contention profiler on chainbase mutex,expanded
+487,P2,concurrency,S,todo,Lock-free stats counters export,expanded
+488,P2,concurrency,S,todo,Read mostly config atomics,expanded
+489,P2,concurrency,S,todo,Immutable config snapshot per block,expanded
+490,P2,concurrency,S,todo,Plugin isolation process option (research),expanded
+491,P2,concurrency,S,todo,seccomp-filtered plugin threads,expanded
+492,P2,concurrency,S,todo,cgroup freeze noncritical plugins under load,expanded
+493,P2,concurrency,S,todo,Fair queuing for multi-producer apply,expanded
+494,P2,concurrency,S,todo,Eliminate recursive mutex use,expanded
+495,P2,concurrency,S,todo,std::shared_mutex timed try for API,expanded
+496,P2,concurrency,S,todo,API reads from irreversible snapshot clone,expanded
+497,P2,concurrency,S,todo,MVCC research for chainbase (long-term),expanded
+498,P2,concurrency,S,todo,Object version counters for optimistic concurrency,expanded
+499,P2,concurrency,S,todo,ABA-safe free list tags,expanded
+500,P2,concurrency,S,todo,Pointer compression for 64-bit indexes on <16TB,expanded
+501,P2,concurrency,S,todo,Custom offset_ptr packing for SHM,expanded
+502,P2,concurrency,S,todo,Avoid false sharing in worker_thread_pool queues,expanded
+503,P2,concurrency,S,todo,Queue node pool preallocation,expanded
+504,P2,concurrency,S,todo,Spin-then-park policy for short critical sections,expanded
+505,P2,concurrency,S,todo,Adaptive spin counts from CPU model,expanded
+506,P2,concurrency,S,todo,Yield on mobile when thermal high,expanded
+507,P2,concurrency,S,todo,Parallel index iteration for read-only APIs,expanded
+508,P2,concurrency,S,todo,Snapshot isolation for database_api get_*,expanded
+509,P2,concurrency,S,todo,Copy elision of multi_index iterators,expanded
+510,P2,concurrency,S,todo,const-correct read paths,expanded
+511,P2,concurrency,S,todo,Thread sanitizer in CI nightly,expanded
+512,P2,concurrency,S,todo,Helgrind optional job,expanded
+513,P2,concurrency,S,todo,Race detection on fork switch,expanded
+514,P2,concurrency,S,todo,Document happens-before for irreversible,expanded
+515,P2,concurrency,S,todo,Formal model of lock hierarchy,expanded
+516,P2,concurrency,S,todo,Auto-generated lock order tests,expanded
+517,P2,concurrency,S,todo,Benchmark: parallel vs serial apply synthetic,expanded
+518,P2,concurrency,S,todo,Benchmark: lock contention under 32 threads,expanded
+519,P2,concurrency,S,todo,Benchmark: RCU vs mutex account lookup,expanded
+520,P2,concurrency,S,todo,Fallback serial apply if parallel detect conflict,expanded
+521,P2,concurrency,S,todo,Conflict rate metrics,expanded
+522,P2,concurrency,S,todo,Dependency analysis cache across similar blocks,expanded
+523,P2,concurrency,S,todo,Static op-class independence table,expanded
+524,P2,concurrency,S,todo,Runtime conflict log for developers,expanded
+525,P2,concurrency,S,todo,Shard mempool by account,expanded
+526,P2,concurrency,S,todo,Parallel RC pre-charge,expanded
+527,P2,concurrency,S,todo,Parallel signature check with batch verify,expanded
+528,P2,concurrency,S,todo,Wait-free broadcast of new head to APIs,expanded
+529,P2,concurrency,S,todo,Eventfd notify for local consumers,expanded
+530,P2,concurrency,S,todo,Shared memory ring for HAF handoff,expanded
+531,P2,concurrency,S,todo,Zero-copy block view into SHM,expanded
+532,P2,concurrency,S,todo,Immutable full_block after seal,expanded
+533,P2,concurrency,S,todo,Const transaction_span type,expanded
+534,P2,concurrency,S,todo,Reduce atomic refcounts on block seal,expanded
+535,P2,concurrency,S,todo,Intrusive list for pending undo,expanded
+536,P2,concurrency,S,todo,Epoch for plugin handler generation,expanded
+537,P2,concurrency,S,todo,Generational arena reset per block,expanded
+538,P2,concurrency,S,todo,Bounded memory for parallel speculative validates,expanded
+539,P2,concurrency,S,todo,Cancel speculative work on better head,expanded
+540,P2,concurrency,S,todo,Priority: user-RPC over background index,expanded
+541,P2,plugins_haf,M,todo,"Deterministic, configurable plugin load order",catalogue
+542,P2,plugins_haf,M,todo,Lazy plugin initialization,catalogue
+543,P2,plugins_haf,M,todo,Dependency-graph loading of only required plugins,catalogue
+544,P2,plugins_haf,M,todo,Hot-reload of non-consensus API plugins,catalogue
+545,P2,plugins_haf,M,todo,Validated plugin configuration schema,catalogue
+546,P2,plugins_haf,M,todo,Per-plugin latency budgets,catalogue
+547,P0,plugins_haf,M,todo,Zero-copy JSON (simdjson / RapidJSON),catalogue
+548,P2,plugins_haf,M,todo,Binary protocol option (Cap’n Proto / FlatBuffers),catalogue
+549,P2,plugins_haf,M,todo,Generated gRPC services from existing APIs,catalogue
+550,P2,plugins_haf,M,todo,GraphQL layer over `database_api`,catalogue
+551,P2,plugins_haf,M,todo,Connection pooling + keep-alive for JSON-RPC,catalogue
+552,P2,plugins_haf,M,todo,Native request batching,catalogue
+553,P2,plugins_haf,M,todo,ETag / If-None-Match caching,catalogue
+554,P2,plugins_haf,M,todo,RC-aware rate limiting,catalogue
+555,P2,plugins_haf,M,todo,Async API handlers (coroutines or worker pool),catalogue
+556,P2,plugins_haf,M,todo,Isolated API thread pool,catalogue
+557,P2,plugins_haf,M,todo,gzip/brotli for large responses,catalogue
+558,P2,plugins_haf,M,todo,Optimized default pagination,catalogue
+559,P2,plugins_haf,M,todo,Gradual `condenser_api` deprecation with migration guide,catalogue
+560,P2,plugins_haf,M,todo,Per-method latency metrics,catalogue
+561,P2,plugins_haf,M,todo,PostgreSQL `COPY` for bulk virtual ops in `sql_serializer`,catalogue
+562,P2,plugins_haf,M,todo,Prepared statements everywhere in serializer,catalogue
+563,P2,plugins_haf,M,todo,Parallel workers for different HAF tables,catalogue
+564,P2,plugins_haf,M,todo,Configurable batch size / flush interval,catalogue
+565,P2,plugins_haf,M,todo,Skip unneeded tables,catalogue
+566,P2,plugins_haf,M,todo,Automatic block-range partitioning of HAF tables,catalogue
+567,P2,plugins_haf,M,todo,Columnar storage option for analytics,catalogue
+568,P2,plugins_haf,M,todo,Incrementally refreshed materialized views,catalogue
+569,P2,plugins_haf,M,todo,TimescaleDB (or similar) support,catalogue
+570,P2,plugins_haf,M,todo,Declarative pruning policy engine,catalogue
+571,P2,plugins_haf,M,todo,Lightweight HAF that omits full history,catalogue
+572,P2,plugins_haf,M,todo,Embedded HAF (SQLite / DuckDB) for mobile / single-user,catalogue
+573,P2,plugins_haf,M,todo,Cython / Numba acceleration of WorkerBee hot loops,catalogue
+574,P2,plugins_haf,M,todo,Zero-copy `memoryview` access in WorkerBee,catalogue
+575,P2,plugins_haf,M,todo,Optimized Wax TS/JS + WASM builds,catalogue
+576,P2,plugins_haf,M,todo,Clive TUI latency improvements,catalogue
+577,P2,plugins_haf,M,todo,Denser incremental UI updates,catalogue
+578,P2,plugins_haf,M,todo,Official OpenAPI / Swagger with examples,catalogue
+579,P2,plugins_haf,M,todo,More language SDKs with built-in pooling,catalogue
+580,P2,plugins_haf,M,todo,API gateway with load balancing across nodes,catalogue
+581,P2,plugins_haf,M,todo,Read-replica HAF nodes,catalogue
+582,P2,plugins_haf,M,todo,CDC from HAF to Kafka / NATS,catalogue
+583,P2,plugins_haf,M,todo,Webhook plugin for new blocks / ops,catalogue
+584,P2,plugins_haf,M,todo,Elasticsearch / OpenSearch export plugin,catalogue
+585,P2,plugins_haf,M,todo,seccomp / process sandbox for plugins,catalogue
+586,P2,plugins_haf,M,todo,cgroup resource limits per plugin,catalogue
+587,P2,plugins_haf,M,todo,Automatic disable on plugin health failure,catalogue
+588,P2,plugins_haf,M,todo,Benchmarked example-plugin template,catalogue
+589,P2,plugins_haf,M,todo,Community plugin registry,catalogue
+590,P2,plugins_haf,M,todo,Versioned plugin API,catalogue
+591,P2,plugins_haf,M,todo,Reduced registration overhead,catalogue
+592,P2,plugins_haf,M,todo,Compile-time plugin selection for light builds,catalogue
+593,P2,plugins_haf,M,todo,Shared-library vs static plugin choice,catalogue
+594,P2,plugins_haf,M,todo,Simple KV cache plugin for frequent gets,catalogue
+595,P2,plugins_haf,M,todo,Node performance-stats API,catalogue
+596,P2,plugins_haf,M,todo,Server-Sent Events for block streams,catalogue
+597,P2,plugins_haf,M,todo,WebSocket compression + binary frames,catalogue
+598,P2,plugins_haf,M,todo,HiveAuth / JWT for APIs without slowing public reads,catalogue
+599,P2,plugins_haf,M,todo,Quota system tied to RC or stake,catalogue
+600,P2,plugins_haf,M,todo,HAF query-optimizer hints for social patterns,catalogue
+601,P2,plugins_haf,M,todo,Pre-aggregated trending / rewards tables,catalogue
+602,P2,plugins_haf,M,todo,Full-text search indexes in HAF,catalogue
+603,P2,plugins_haf,M,todo,Incremental maintenance of follows / communities,catalogue
+604,P2,plugins_haf,M,todo,"Multi-backend HAF (Postgres, MySQL, Cockroach)",catalogue
+605,P2,plugins_haf,M,todo,Zero-downtime schema migrations,catalogue
+606,P2,plugins_haf,M,todo,Realistic social-workload HAF test suite,catalogue
+607,P2,plugins_haf,M,todo,Query best-practice documentation,catalogue
+608,P2,plugins_haf,M,todo,Client-side caching libraries,catalogue
+609,P2,plugins_haf,M,todo,GraphQL subscriptions,catalogue
+610,P2,plugins_haf,M,todo,Pre-computed fields to reduce JSON cost,catalogue
+611,P2,plugins_haf,M,todo,Response size limits with clear errors,catalogue
+612,P2,plugins_haf,M,todo,Parallel independent methods inside a batch,catalogue
+613,P2,plugins_haf,M,todo,Session affinity,catalogue
+614,P2,plugins_haf,M,todo,Cache-hit-rate metrics,catalogue
+615,P2,plugins_haf,M,todo,Auto-scaling guidance for HAF,catalogue
+616,P2,plugins_haf,M,todo,Prometheus exporter plugin,catalogue
+617,P2,plugins_haf,M,todo,OpenTelemetry tracing across API → apply,catalogue
+618,P2,plugins_haf,M,todo,Personal light HAF (only followed accounts),catalogue
+619,P2,plugins_haf,M,todo,Parquet export for offline analytics,catalogue
+620,P2,plugins_haf,M,todo,Optimized batch account-history queries,catalogue
+621,P2,plugins_haf,M,todo,Virtual-op filtering at serializer,catalogue
+622,P2,plugins_haf,M,todo,Dependency injection for testability,catalogue
+623,P2,plugins_haf,M,todo,Compile-time plugin registration,catalogue
+624,P2,plugins_haf,M,todo,Reduced virtual calls in hooks,catalogue
+625,P2,plugins_haf,M,todo,Inline critical callbacks,catalogue
+626,P2,plugins_haf,M,todo,Per-plugin thread pools,catalogue
+627,P2,plugins_haf,M,todo,Async notification after irreversible,catalogue
+628,P2,plugins_haf,M,todo,Testnet RC-cost override plugin,catalogue
+629,P2,plugins_haf,M,todo,Comprehensive plugin test framework,catalogue
+630,P2,plugins_haf,M,todo,Per-plugin performance regression tests,catalogue
+631,P2,plugins_haf,M,todo,Bounty for fastest alternative history plugin,catalogue
+632,P2,plugins_haf,M,todo,Official HAF vs old `account_history` benchmarks,catalogue
+633,P2,plugins_haf,M,todo,Migration tools from legacy plugins,catalogue
+634,P2,plugins_haf,M,todo,HAF sharding across multiple Postgres instances,catalogue
+635,P2,plugins_haf,M,todo,Read-your-writes consistency options,catalogue
+636,P2,plugins_haf,M,todo,Pre-broadcast resource-cost estimation API,catalogue
+637,P2,plugins_haf,M,todo,Optimized legacy `get_content` / `get_discussions`,catalogue
+638,P2,plugins_haf,M,todo,Dedicated cache for witness schedule + global props,catalogue
+639,P2,plugins_haf,M,todo,Reduce string copies in response building,catalogue
+640,P2,plugins_haf,S,todo,API cleanup: deprecate unused condenser methods,expanded
+641,P2,plugins_haf,S,todo,API cleanup: unify pagination tokens,expanded
+642,P2,plugins_haf,S,todo,API cleanup: binary error codes,expanded
+643,P2,plugins_haf,S,todo,HAF engine: DuckDB analytical backend option,expanded
+644,P2,plugins_haf,S,todo,HAF engine: ClickHouse export path,expanded
+645,P2,plugins_haf,S,todo,HAF engine: SQLite personal mode,expanded
+646,P2,plugins_haf,S,todo,SDK: Python asyncio client,expanded
+647,P2,plugins_haf,S,todo,SDK: Rust high-perf client,expanded
+648,P2,plugins_haf,S,todo,SDK: Go client with pooling,expanded
+649,P2,plugins_haf,S,todo,SDK: Kotlin multiplatform,expanded
+650,P2,plugins_haf,S,todo,Realtime: NATS jetstream bridge,expanded
+651,P2,plugins_haf,S,todo,Realtime: Redis streams bridge,expanded
+652,P2,plugins_haf,S,todo,Realtime: WebPush for follows,expanded
+653,P2,plugins_haf,S,todo,GraphQL: dataloader batching,expanded
+654,P2,plugins_haf,S,todo,GraphQL: persisted queries,expanded
+655,P2,plugins_haf,S,todo,OpenAPI: generated clients,expanded
+656,P2,plugins_haf,S,todo,Rate limit: per-IP token bucket,expanded
+657,P2,plugins_haf,S,todo,Rate limit: per-key RC-linked,expanded
+658,P2,plugins_haf,S,todo,Cache: redis for get_accounts,expanded
+659,P2,plugins_haf,S,todo,Cache: CDN for static chain props,expanded
+660,P2,plugins_haf,S,todo,HAF: BRIN indexes on block_num,expanded
+661,P2,plugins_haf,S,todo,HAF: partial indexes for open orders,expanded
+662,P2,plugins_haf,S,todo,HAF: vacuum autotune,expanded
+663,P2,plugins_haf,S,todo,HAF: logical replication recipes,expanded
+664,P2,plugins_haf,S,todo,Webhook: signed payloads,expanded
+665,P2,plugins_haf,S,todo,Webhook: retry with backoff,expanded
+666,P2,plugins_haf,S,todo,Elastic: op index template,expanded
+667,P2,plugins_haf,S,todo,Plugin: healthcheck HTTP,expanded
+668,P2,plugins_haf,S,todo,Plugin: graceful drain,expanded
+669,P2,plugins_haf,S,todo,Plugin: version negotiation,expanded
+670,P2,plugins_haf,S,todo,Plugin: feature flags,expanded
+671,P2,plugins_haf,S,todo,sql_serializer: COPY FROM STDIN binary,expanded
+672,P2,plugins_haf,S,todo,sql_serializer: multi-connection pipeline,expanded
+673,P2,plugins_haf,S,todo,sql_serializer: backpressure to hived,expanded
+674,P2,plugins_haf,S,todo,WorkerBee: vectorized decode,expanded
+675,P2,plugins_haf,S,todo,WorkerBee: arrow export,expanded
+676,P2,plugins_haf,S,todo,Wax: smaller wasm binary,expanded
+677,P2,plugins_haf,S,todo,Clive: virtualized history list,expanded
+678,P2,plugins_haf,S,todo,condenser_api: compatibility shim metrics,expanded
+679,P2,plugins_haf,S,todo,database_api: field masks,expanded
+680,P2,plugins_haf,S,todo,database_api: projection pushdown,expanded
+681,P2,plugins_haf,S,todo,account_history: rocksdb TTL compaction,expanded
+682,P2,plugins_haf,S,todo,market_history: downsample old buckets,expanded
+683,P2,plugins_haf,S,todo,rc_api: cost estimate endpoint,expanded
+684,P2,plugins_haf,S,todo,debug_node: faster skip,expanded
+685,P2,plugins_haf,S,todo,test plugin performance harness,expanded
+686,P2,plugins_haf,S,todo,plugin registry: signed packages,expanded
+687,P2,plugins_haf,S,todo,plugin sandbox: seccomp profile default,expanded
+688,P2,plugins_haf,S,todo,HAF prune: partition drop by month,expanded
+689,P2,plugins_haf,S,todo,HAF: cold storage tier S3,expanded
+690,P2,plugins_haf,S,todo,Query planner hints doc pack,expanded
+691,P0,mobile,M,design,`HIVE_LIGHT_NODE` CMake option that strips non-essential plugins and indexes at compile time,catalogue
+692,P1,mobile,M,todo,Runtime plugin whitelist,catalogue
+693,P1,mobile,M,todo,Aggressive “last N days” comment/vote pruning,catalogue
+694,P1,mobile,M,todo,Compressed in-memory account representation,catalogue
+695,P1,mobile,M,todo,Full ARM NEON acceleration of remaining crypto and hashing,catalogue
+696,P1,mobile,M,todo,SVE support for newer ARM cores,catalogue
+697,P1,mobile,M,todo,Binary size target < 50 MB via LTO + section GC + `-Os`,catalogue
+698,P1,mobile,M,todo,Symbol stripping for mobile builds,catalogue
+699,P1,mobile,M,todo,Snapshot format optimized for sequential flash writes,catalogue
+700,P1,mobile,M,todo,Header-only + selective body download,catalogue
+701,P0,mobile,M,todo,Personal-node mode (own + followed accounts only),catalogue
+702,P1,mobile,M,todo,SQLite-backed HAF for mobile,catalogue
+703,P1,mobile,M,todo,Sync only while charging / on Wi-Fi,catalogue
+704,P1,mobile,M,todo,Thermal throttling of worker threads,catalogue
+705,P1,mobile,M,todo,Battery-level pause of non-critical work,catalogue
+706,P1,mobile,M,todo,Android NDK / iOS cross-compile support,catalogue
+707,P1,mobile,M,todo,`madvise` sequential / dontneed on mobile block_log,catalogue
+708,P1,mobile,M,todo,Smaller undo window (with checkpoints),catalogue
+709,P1,mobile,M,todo,Pure process memory (no shared-file) + periodic serialize,catalogue
+710,P1,mobile,M,todo,Simplified RC approximation tables for mobile,catalogue
+711,P1,mobile,M,todo,ARM-specific assembly for hot hashes,catalogue
+712,P1,mobile,M,todo,Power-efficient sleep between 3 s blocks,catalogue
+713,P1,mobile,M,todo,User notification when node falls behind,catalogue
+714,P1,mobile,M,todo,Simple mobile management daemon / UI,catalogue
+715,P1,mobile,M,todo,Automatic trusted-mirror snapshot on first run,catalogue
+716,P1,mobile,M,todo,Efficient delta sync after snapshot,catalogue
+717,P1,mobile,M,todo,External SD-card support for block_log,catalogue
+718,P1,mobile,M,todo,Local state encryption,catalogue
+719,P1,mobile,M,todo,Minimal plugin set for mobile,catalogue
+720,P1,mobile,M,todo,Compile-out of all testnet / mirrornet code,catalogue
+721,P1,mobile,M,todo,musl or smaller runtime,catalogue
+722,P1,mobile,M,todo,ARM-specific PGO,catalogue
+723,P1,mobile,M,todo,Compile-time Boost reduction for light builds,catalogue
+724,P1,mobile,M,todo,Small-heap-tuned custom allocator,catalogue
+725,P1,mobile,M,todo,Periodic explicit free of cold caches,catalogue
+726,P1,mobile,M,todo,32-bit ARM support if still required,catalogue
+727,P1,mobile,M,todo,"Device-specific documentation (Pi, phones, SBCs)",catalogue
+728,P0,mobile,M,todo,< 4 GB RAM benchmark suite,catalogue
+729,P1,mobile,M,todo,Auto-detect RAM → choose prune level,catalogue
+730,P2,mobile,M,todo,Progressive-web or lightweight control frontend,catalogue
+731,P2,mobile,M,todo,Mobile OS background-task integration,catalogue
+732,P2,mobile,M,todo,Reduced flash wear from logging,catalogue
+733,P2,mobile,M,todo,Wear-leveling-aware block_log writes,catalogue
+734,P2,mobile,M,todo,Optional cloud state backup,catalogue
+735,P2,mobile,M,todo,Prefer other mobile / low-bandwidth peers,catalogue
+736,P2,mobile,M,todo,Mandatory compressed P2P on mobile,catalogue
+737,P2,mobile,M,todo,Lower max connections (8–16),catalogue
+738,P2,mobile,M,todo,Duty-cycled P2P,catalogue
+739,P2,mobile,M,todo,Fast resume from sleep,catalogue
+740,P2,mobile,M,todo,Data-saver mode that skips non-essentials,catalogue
+741,P2,mobile,M,todo,big.LITTLE awareness (pin critical threads to big cores),catalogue
+742,P2,mobile,M,todo,Static linking of dependencies,catalogue
+743,P2,mobile,M,todo,Regular ARM CI builds and tests,catalogue
+744,P2,mobile,M,todo,Size / RAM regression tests in CI,catalogue
+745,P2,mobile,M,todo,User-facing sync / RAM / battery metrics,catalogue
+746,P2,mobile,M,todo,One-click images for common ARM boards,catalogue
+747,P2,mobile,M,todo,Community PostmarketOS / mobile-Linux images,catalogue
+748,P2,mobile,M,todo,Pruned HAF retention policies (30/90/365 days),catalogue
+749,P2,mobile,M,todo,On-device indexing only for followed accounts,catalogue
+750,P2,mobile,M,todo,Approximate indexes for search,catalogue
+751,P2,mobile,M,todo,Lazy account-history load,catalogue
+752,P2,mobile,M,todo,View-only mode (no private keys),catalogue
+753,P2,mobile,M,todo,TEE / secure-enclave key storage,catalogue
+754,P2,mobile,M,todo,Reduced virtual-op processing,catalogue
+755,P2,mobile,M,todo,Skip sig checks below last irreversible when using trusted snapshot,catalogue
+756,P2,mobile,M,todo,Configurable trust level for faster sync,catalogue
+757,P2,mobile,M,todo,Mobile-friendly seed list,catalogue
+758,P2,mobile,M,todo,Adaptive apply rate based on device load,catalogue
+759,P2,mobile,M,todo,Pause when user is interacting with other apps,catalogue
+760,P2,mobile,M,todo,zram / compressed-swap advice,catalogue
+761,P2,mobile,M,todo,`mlock` only the critical working set,catalogue
+762,P2,mobile,M,todo,Avoid large stack allocations,catalogue
+763,P2,mobile,M,todo,Thread stack-size tuning,catalogue
+764,P2,mobile,M,todo,Page-size / huge-page choice for ARM MMU,catalogue
+765,P2,mobile,M,todo,Device-specific performance expectations documentation,catalogue
+766,P2,mobile,M,todo,Community device config templates,catalogue
+767,P2,mobile,M,todo,Long-term light-client with fraud / optimistic proofs,catalogue
+768,P1,mobile,S,todo,Battery: coalesce wakeups to block interval,expanded
+769,P1,mobile,S,todo,Battery: batch disk flushes,expanded
+770,P1,mobile,S,todo,Thermal: stepwise reduce thread count,expanded
+771,P1,mobile,S,todo,Thermal: reduce RocksDB compaction,expanded
+772,P1,mobile,S,todo,Flash: fsync policy relaxed on mobile,expanded
+773,P1,mobile,S,todo,Flash: append-only state log option,expanded
+774,P1,mobile,S,todo,Cross-compile: Android ABI arm64-v8a,expanded
+775,P1,mobile,S,todo,Cross-compile: iOS bitcode-free arm64,expanded
+776,P1,mobile,S,todo,Cross-compile: RISC-V experimental,expanded
+777,P1,mobile,S,todo,Light client: optimistic fraud proof research,expanded
+778,P1,mobile,S,todo,Light client: UTXO-like account proof research,expanded
+779,P1,mobile,S,todo,Light client: witness checkpoint signatures,expanded
+780,P1,mobile,S,todo,Personal node: follow-graph limited state,expanded
+781,P1,mobile,S,todo,Personal node: mute list local only,expanded
+782,P1,mobile,S,todo,Data saver: skip images metadata ops,expanded
+783,P1,mobile,S,todo,Data saver: headers + own txs only,expanded
+784,P1,mobile,S,todo,Wi-Fi only sync toggle,expanded
+785,P1,mobile,S,todo,Background sync OS job (Android WorkManager),expanded
+786,P1,mobile,S,todo,Background sync OS job (iOS BGTask),expanded
+787,P1,mobile,S,todo,First-run: streaming snapshot with UI progress,expanded
+788,P1,mobile,S,todo,Resume: crash-safe snapshot cursor,expanded
+789,P1,mobile,S,todo,Key storage: Android Keystore,expanded
+790,P1,mobile,S,todo,Key storage: iOS Secure Enclave,expanded
+791,P0,build_ci,M,todo,Default PGO + LTO + mold/lld in release builds,catalogue
+792,P1,build_ci,M,todo,Pre-compiled headers / C++20 modules for the hot header chain,catalogue
+793,P1,build_ci,M,todo,"Split remaining large TUs (`database.cpp`, evaluators, etc.)",catalogue
+794,P0,build_ci,M,todo,Continuous micro-benchmarks + regression gates in CI,catalogue
+795,P1,build_ci,M,todo,Mandatory ASan / TSan / UBSan + clang-tidy performance checks,catalogue
+796,P1,build_ci,M,todo,Explicit instantiations for the most expensive templates,catalogue
+797,P1,build_ci,M,todo,Reduce Boost surface; prefer std / absl,catalogue
+798,P1,build_ci,M,todo,Published sync-time / RAM / TPS benchmarks with every release,catalogue
+799,P1,build_ci,M,todo,Continuous protocol / apply / P2P fuzzing,catalogue
+800,P1,build_ci,M,todo,Built-in continuous profiler / flame-graph endpoint,catalogue
+801,P1,build_ci,M,todo,Hardware-aware config auto-tuner,catalogue
+802,P1,build_ci,M,todo,Hot-reload of non-consensus settings,catalogue
+803,P1,build_ci,M,todo,Better contributor docs and “perf good-first-issue” tags,catalogue
+804,P1,build_ci,M,todo,Example optimization patches,catalogue
+805,P0,build_ci,M,todo,Modular CMake so light builds compile only needed plugins,catalogue
+806,P1,build_ci,M,todo,Cross-compile ease for aarch64 / Android / iOS,catalogue
+807,P1,build_ci,M,todo,sccache / ccache defaults,catalogue
+808,P1,build_ci,M,todo,Parallel index instantiation control,catalogue
+809,P1,build_ci,M,todo,Header-include hygiene enforcement (IWYU already started),catalogue
+810,P1,build_ci,M,todo,Specialised assertion macros expanded (already begun),catalogue
+811,P1,build_ci,M,todo,Build-analysis documents kept up to date,catalogue
+812,P1,build_ci,M,todo,CI that fails on > X % regression in key benchmarks,catalogue
+813,P1,build_ci,M,todo,Synthetic social-workload generator,catalogue
+814,P1,build_ci,M,todo,Chaos + performance-under-failure tests,catalogue
+815,P1,build_ci,M,todo,Load-testing scripts for every node type,catalogue
+816,P1,build_ci,M,todo,Opt-in profiling-data upload for core-team analysis,catalogue
+817,P1,build_ci,M,todo,“Why is my node slow” diagnostic tool,catalogue
+818,P1,build_ci,M,todo,Config-recommendation engine from live metrics,catalogue
+819,P1,build_ci,M,todo,Historical performance trend storage,catalogue
+820,P2,build_ci,M,todo,Integration with external APM,catalogue
+821,P2,build_ci,M,todo,Custom metric plugins,catalogue
+822,P2,build_ci,M,todo,Real-time TUI monitor (htop-style for hived),catalogue
+823,P2,build_ci,M,todo,Mobile monitoring companion,catalogue
+824,P2,build_ci,M,todo,Alerting on deviation from performance budgets,catalogue
+825,P2,build_ci,M,todo,Configurable trace sampling,catalogue
+826,P2,build_ci,M,todo,Correlation IDs across P2P → apply → API,catalogue
+827,P2,build_ci,M,todo,Deadlock / long-lock detection,catalogue
+828,P2,build_ci,M,todo,Allocation tracing in debug builds,catalogue
+829,P2,build_ci,M,todo,Leak-detection reports,catalogue
+830,P2,build_ci,M,todo,Build-time instrumentation of hot functions,catalogue
+831,P2,build_ci,M,todo,Runtime feature flags for extra metrics,catalogue
+832,P2,build_ci,M,todo,Full metric documentation,catalogue
+833,P2,build_ci,M,todo,Shared Grafana dashboards,catalogue
+834,P2,build_ci,M,todo,Per-release benchmark publication,catalogue
+835,P2,build_ci,M,todo,Micro-benchmark suite for every evaluator and index,catalogue
+836,P2,build_ci,M,todo,Linux `perf` / VTune integration helpers,catalogue
+837,P2,build_ci,M,todo,Customizable metric retention,catalogue
+838,P2,build_ci,M,todo,Comparison mode (two configs side-by-side),catalogue
+839,P2,build_ci,M,todo,State-size growth time-series,catalogue
+840,P2,build_ci,M,todo,Disk / RAM exhaustion prediction,catalogue
+841,P2,build_ci,M,todo,Opt-in public witness performance leaderboard,catalogue
+842,P2,build_ci,M,todo,Tools to replay specific blocks under profiler,catalogue
+843,P2,build_ci,M,todo,Formal performance budgets per hardfork,catalogue
+844,P2,build_ci,M,todo,Community performance-bounty / leaderboard program,catalogue
+845,P2,build_ci,S,todo,CI: clang-tidy modernize checks,expanded
+846,P2,build_ci,S,todo,CI: clang-tidy performance checks gate,expanded
+847,P2,build_ci,S,todo,CI: include-what-you-use diff,expanded
+848,P2,build_ci,S,todo,CI: codespell on docs,expanded
+849,P2,build_ci,S,todo,CI: license header check,expanded
+850,P2,build_ci,S,todo,CI: SBOM generation,expanded
+851,P2,build_ci,S,todo,CI: dependency vulnerability scan,expanded
+852,P2,build_ci,S,todo,CI: reproducible build attestation,expanded
+853,P2,build_ci,S,todo,Doc template: evaluator performance note,expanded
+854,P2,build_ci,S,todo,Doc template: plugin README skeleton,expanded
+855,P2,build_ci,S,todo,Doc template: ADR for consensus changes,expanded
+856,P2,build_ci,S,todo,Onboarding: docker-compose one-shot testnet,expanded
+857,P2,build_ci,S,todo,Onboarding: 15-minute contributor guide,expanded
+858,P2,build_ci,S,todo,Onboarding: architecture diagram generator,expanded
+859,P2,build_ci,S,todo,Good-first-issue auto-labeler,expanded
+860,P2,build_ci,S,todo,Benchmark publish to gh-pages,expanded
+861,P2,build_ci,S,todo,Benchmark compare bot on PRs,expanded
+862,P2,build_ci,S,todo,Fuzz: libFuzzer corpus seed pack,expanded
+863,P2,build_ci,S,todo,Fuzz: AFL++ weekly,expanded
+864,P2,build_ci,S,todo,Static analysis: CodeQL queries for chain,expanded
+865,P2,build_ci,S,todo,Static analysis: Semgrep rules for undo,expanded
+866,P2,build_ci,S,todo,Coverage: critical path 80% gate,expanded
+867,P2,build_ci,S,todo,Coverage: protocol ser/de 95% gate,expanded
+868,P2,build_ci,S,todo,Release: changelog automation,expanded
+869,P2,build_ci,S,todo,Release: multi-arch docker matrix,expanded
+870,P2,build_ci,S,todo,Release: signed binaries,expanded
+871,P2,build_ci,S,todo,sccache remote cache option,expanded
+872,P2,build_ci,S,todo,distcc optional farm,expanded
+873,P2,build_ci,S,todo,CMake: preset mobile-light,expanded
+874,P2,build_ci,S,todo,CMake: preset witness-maxperf,expanded
+875,P2,build_ci,S,todo,CMake: preset haf-api,expanded
+876,P2,build_ci,S,todo,Module map experiment for types.hpp,expanded
+877,P2,build_ci,S,todo,Unity build option for slow TUs,expanded
+878,P2,build_ci,S,todo,Split database.cpp by domain,expanded
+879,P2,build_ci,S,todo,Split evaluators into per-op TUs with unity opt,expanded
+880,P2,build_ci,S,todo,Header unit BMI cache,expanded
+881,P2,build_ci,S,todo,Precommit: format + lint,expanded
+882,P2,build_ci,S,todo,Precommit: quick unit subset,expanded
+883,P2,build_ci,S,todo,Devcontainer with deps,expanded
+884,P2,build_ci,S,todo,Gitpod/Codespaces config,expanded
+885,P2,build_ci,S,todo,Example patch: generic_index explicit instantiation,expanded
+886,P2,build_ci,S,todo,Example patch: types.hpp split,expanded
+887,P2,build_ci,S,todo,Example patch: worker pool apply queue,expanded
+888,P2,build_ci,S,todo,Perf working group RFC template,expanded
+889,P2,build_ci,S,todo,Bounty brief template,expanded
+890,P2,build_ci,S,todo,Monthly perf report template,expanded
+891,P0,rc_deploy,M,portable-prototype,Dynamically calibrate RC costs to measured wall-time / CPU / I/O,catalogue
+892,P1,rc_deploy,M,todo,Faster fork-DB and irreversible handling,catalogue
+893,P1,rc_deploy,M,todo,"RC mana telemetry (usage, regeneration, failures)",catalogue
+894,P0,rc_deploy,M,todo,Formal cost model that accounts for actual measured resource use,catalogue
+895,P1,rc_deploy,M,todo,Security improvements that enable fewer runtime checks (formal verification of critical paths),catalogue
+896,P0,rc_deploy,M,todo,Faster signature verification batching / SIMD,catalogue
+897,P1,rc_deploy,M,todo,Reduced authority recursion depth checks where proven safe,catalogue
+898,P1,rc_deploy,M,todo,Checkpoint-based trust modes for faster mobile sync,catalogue
+899,P1,rc_deploy,M,todo,Hardware security module / TEE integration paths,catalogue
+900,P1,rc_deploy,M,todo,Deployment recipes for Kubernetes / Nomad with resource requests,catalogue
+901,P1,rc_deploy,M,todo,Auto-tuning shared-file-size and RocksDB cache from detected hardware,catalogue
+902,P1,rc_deploy,M,todo,One-command Docker / binary installers for common platforms,catalogue
+903,P1,rc_deploy,M,todo,systemd / service-unit best-practice templates,catalogue
+904,P1,rc_deploy,M,todo,cgroup and resource-isolation examples,catalogue
+905,P1,rc_deploy,M,todo,Multi-node testnet orchestration tools,catalogue
+906,P1,rc_deploy,M,todo,"Comparative study and selective adoption of ideas from Solana (parallel execution), Aptos/Sui (object model), other Graphene forks, and modern L2s",catalogue
+907,P1,rc_deploy,M,todo,AI / ML assisted hot-path detection and automatic patch suggestion,catalogue
+908,P1,rc_deploy,M,todo,Continuous learning of optimal config parameters from fleet telemetry (opt-in),catalogue
+909,P1,rc_deploy,M,todo,Formal methods / model checking of consensus and RC invariants,catalogue
+910,P1,rc_deploy,M,todo,Reduced legacy Graphene code paths,catalogue
+911,P0,rc_deploy,M,in-progress,WASM sandbox for future smart-contract / plugin evaluation (roadmap-aligned),catalogue
+912,P1,rc_deploy,M,todo,eBPF hooks for advanced monitoring without code changes,catalogue
+913,P1,rc_deploy,M,todo,Snapshot + state-diff tools for rapid testnet / mirrornet,catalogue
+914,P1,rc_deploy,M,todo,Structured async logging with compile-time levels,catalogue
+915,P1,rc_deploy,M,todo,"Community process changes that accelerate optimization velocity (bounties, RFCs, dedicated perf working group)",catalogue
+916,P2,rc_deploy,S,todo,RC: continuous calibration job from apply traces,expanded
+917,P2,rc_deploy,S,todo,RC: per-op p50/p99 cost tables published,expanded
+918,P2,rc_deploy,S,todo,RC: separate CPU vs storage resource dimensions,expanded
+919,P2,rc_deploy,S,todo,RC: market-history write cost refinement,expanded
+920,P2,rc_deploy,S,todo,RC: custom_json size-squared component,expanded
+921,P2,rc_deploy,S,todo,RC: NFT mint state-creation premium,expanded
+922,P2,rc_deploy,S,todo,RC: HTLC create state premium,expanded
+923,P2,rc_deploy,S,todo,RC: contract fuel hard mapping HF param,expanded
+924,P2,rc_deploy,S,todo,RC: refund unused fuel on success path,expanded
+925,P2,rc_deploy,S,todo,RC: mana regen UI telemetry,expanded
+926,P2,rc_deploy,S,todo,Security-perf: batch signature verify,expanded
+927,P2,rc_deploy,S,todo,Security-perf: preparse without full validate,expanded
+928,P2,rc_deploy,S,todo,Security-perf: reduce redundant hash,expanded
+929,P2,rc_deploy,S,todo,Security-perf: constant-time compare audit,expanded
+930,P2,rc_deploy,S,todo,Formal: TLA+ sketch of HTLC,expanded
+931,P2,rc_deploy,S,todo,Formal: model RC non-negativity,expanded
+932,P2,rc_deploy,S,todo,Formal: undo session algebra,expanded
+933,P2,rc_deploy,S,todo,Deploy: k8s StatefulSet for hived,expanded
+934,P2,rc_deploy,S,todo,Deploy: k8s HAF postgres operator,expanded
+935,P2,rc_deploy,S,todo,Deploy: Nomad jobspecs,expanded
+936,P2,rc_deploy,S,todo,Deploy: Ansible role,expanded
+937,P2,rc_deploy,S,todo,Deploy: Terraform modules for witnesses,expanded
+938,P2,rc_deploy,S,todo,Deploy: one-click cloud image,expanded
+939,P2,rc_deploy,S,todo,Deploy: auto-tune from cgroup limits,expanded
+940,P2,rc_deploy,S,todo,Deploy: systemd hardening sandbox,expanded
+941,P2,rc_deploy,S,todo,Deploy: graceful reload docs,expanded
+942,P2,rc_deploy,S,todo,Comparative: Solana parallel scheduler lessons,expanded
+943,P2,rc_deploy,S,todo,Comparative: Aptos Block-STM research note,expanded
+944,P2,rc_deploy,S,todo,Comparative: Sui object ownership model note,expanded
+945,P2,rc_deploy,S,todo,Comparative: Graphene fork optimizations survey,expanded
+946,P2,rc_deploy,S,todo,Comparative: L2 fraud proof patterns for light clients,expanded
+947,P2,rc_deploy,S,todo,AI: offline hot-path classifier on traces,expanded
+948,P2,rc_deploy,S,todo,AI: suggest config from metrics (opt-in),expanded
+949,P2,rc_deploy,S,todo,AI: PR review checklist generator for perf,expanded
+950,P2,rc_deploy,S,todo,eBPF: block apply latency probe,expanded
+951,P2,rc_deploy,S,todo,eBPF: syscall count per block,expanded
+952,P2,rc_deploy,S,todo,eBPF: network drop watch,expanded
+953,P2,rc_deploy,S,todo,Logging: async spdlog-style sinks,expanded
+954,P2,rc_deploy,S,todo,Logging: compile-time level stripping,expanded
+955,P2,rc_deploy,S,todo,Logging: structured JSON fields,expanded
+956,P2,rc_deploy,S,todo,Process: perf bounty board,expanded
+957,P2,rc_deploy,S,todo,Process: monthly optimization sprint,expanded
+958,P2,rc_deploy,S,todo,Process: RFC for any >5% apply change,expanded
+959,P2,rc_deploy,S,todo,Process: public benchmark day,expanded
+960,P2,rc_deploy,S,todo,Runbook: disk full recovery,expanded
+961,P2,rc_deploy,S,todo,Runbook: SHM resize live,expanded
+962,P2,rc_deploy,S,todo,Runbook: corrupt block_log repair,expanded
+963,P2,rc_deploy,S,todo,Runbook: fork storm response,expanded
+964,P2,rc_deploy,S,todo,Runbook: mobile node first sync,expanded
+965,P2,rc_deploy,S,todo,Mirrornet: state-diff bisect tool,expanded
+966,P2,rc_deploy,S,todo,Testnet: rapid reset from snapshot,expanded
+967,P2,rc_deploy,S,todo,HSM: PKCS11 signing path research,expanded
+968,P2,rc_deploy,S,todo,TEE: SGX/SEV witness research,expanded
+969,P2,rc_deploy,S,todo,Checkpoint: social consensus trusted state,expanded
+970,P2,rc_deploy,S,todo,Checkpoint: multi-sig committee format,expanded
+971,P2,rc_deploy,S,todo,WASM: metering host weight table (aligned hive-native),expanded
+972,P2,rc_deploy,S,todo,WASM: deterministic mode flags,expanded
+973,P2,rc_deploy,S,todo,WASM: plugin isolation cgroup,expanded
+974,P2,rc_deploy,S,todo,Authority: proven max recursion depth reduction,expanded
+975,P2,rc_deploy,S,todo,Authority: flatten multi-sig graphs cache,expanded
+976,P2,rc_deploy,S,todo,ForkDB: branch-bound memory cap,expanded
+977,P2,rc_deploy,S,todo,ForkDB: faster switch with shared prefix,expanded
+978,P2,rc_deploy,S,todo,Irreversible: earlier LIB under fast confirm research,expanded
+979,P2,rc_deploy,S,todo,Block producer: packing score optimizations,expanded
+980,P2,rc_deploy,S,todo,Block producer: parallel tx selection,expanded
+981,P2,rc_deploy,S,todo,Economics: RC price stability analysis,expanded
+982,P2,rc_deploy,S,todo,Economics: resource market simulation,expanded
+983,P2,rc_deploy,S,todo,Docs: operator cookbook index,expanded
+984,P2,rc_deploy,S,todo,Docs: perf anti-patterns,expanded
+985,P2,rc_deploy,S,todo,Docs: how to measure before/after,expanded
+986,P2,rc_deploy,S,todo,Onboarding: perf mentor program,expanded
+987,P2,rc_deploy,S,todo,Interop: export Prometheus naming standard,expanded
+988,P2,rc_deploy,S,todo,Interop: OpenTelemetry semantic conventions,expanded
+989,P2,rc_deploy,S,todo,Fleet: opt-in anonymized telemetry schema,expanded
+990,P2,rc_deploy,S,todo,Fleet: config learning with differential privacy,expanded
+991,P2,rc_deploy,S,todo,Legacy: remove unused Graphene paths list,expanded
+992,P2,rc_deploy,S,todo,Legacy: gate old APIs behind compile flag,expanded
+993,P2,rc_deploy,S,todo,Tooling: block profiler CLI,expanded
+994,P2,rc_deploy,S,todo,Tooling: index size reporter,expanded
+995,P2,rc_deploy,S,todo,Tooling: RC cost what-if calculator,expanded
+996,P2,rc_deploy,S,todo,Tooling: snapshot size estimator,expanded
+997,P2,rc_deploy,S,todo,Community: translation of runbooks,expanded
+998,P2,rc_deploy,S,todo,Community: regional mirror seeds,expanded
+999,P2,rc_deploy,S,todo,RC: continuous calibration job from apply traces — detail #999,expanded
+1000,P2,rc_deploy,S,todo,RC: per-op p50/p99 cost tables published — detail #1000,expanded

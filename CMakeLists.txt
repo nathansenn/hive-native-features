@@ -37,6 +37,13 @@ add_executable(hive_native_tests tests/test_runner.cpp)
 target_link_libraries(hive_native_tests PRIVATE hive_native)
 add_test(NAME hive_native_tests COMMAND hive_native_tests)
 
+add_executable(hive_native_perf_tests tests/test_perf.cpp)
+target_link_libraries(hive_native_perf_tests PRIVATE hive_native)
+# worker_pool needs threads
+find_package(Threads REQUIRED)
+target_link_libraries(hive_native_perf_tests PRIVATE Threads::Threads)
+add_test(NAME hive_native_perf_tests COMMAND hive_native_perf_tests)
+
 if(HIVE_NATIVE_BUILD_BENCH)
   add_executable(hive_native_bench benchmarks/bench_ops.cpp)
   target_link_libraries(hive_native_bench PRIVATE hive_native)
