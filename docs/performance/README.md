@@ -4,6 +4,8 @@ As of **2026-07-26**. Catalogue grounded in hived realities (chainbase, worker p
 
 ## Files
 
+| [HIVED_DEVELOPMENT_REVIEW_2026-07.md](./HIVED_DEVELOPMENT_REVIEW_2026-07.md) | Live clone review + top 100 grounded in openhive-network/hive |
+
 | File | Purpose |
 |------|---------|
 | [HIVE_1000_OPTIMIZATIONS.md](./HIVE_1000_OPTIMIZATIONS.md) | Full 1000-item catalogue by category |
@@ -43,4 +45,8 @@ See [docs/07-upstream-integration.md](../07-upstream-integration.md). P0 patches
 - ~3 s block time headroom  
 - Light / pruned / mobile skip paths  
 - RC metering honesty  
-- No consensus change without HF + human gate  
+- No consensus change without HF + human gate
+
+## Development review (live clone)
+
+See **[HIVED_DEVELOPMENT_REVIEW_2026-07.md](./HIVED_DEVELOPMENT_REVIEW_2026-07.md)** for the shallow-clone review of `openhive-network/hive` @ 1.28.7, build-analysis findings, and the prioritized top-100 list mapped to catalogue IDs.
