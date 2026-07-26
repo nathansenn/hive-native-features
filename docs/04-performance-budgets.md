@@ -2,7 +2,7 @@
 
 **Task-ID:** phase-0 / 0.6  
 **Status:** design  
-**Last Updated:** 2026-07-24  
+**Last Updated:** 2026-07-26  
 
 ---
 
@@ -154,10 +154,51 @@ Performance Benchmarker runs suite
 
 ---
 
-## 12. Acceptance
+## 12. Portable calibration (2026-07-26)
+
+Measured with `./build/hive_native_bench` (portable in-memory harness; ratio vs synthetic transfer-class op). **Hard-fail ratios in §3 are unchanged.**
+
+| Field | Value |
+|-------|-------|
+| Date (UTC) | 2026-07-26 |
+| Binary | `build/hive_native_bench` |
+| Commit | `bfb97f7` |
+| Host | Apple M3 Ultra (arm64) |
+| Note | portable in-memory; ratio vs synthetic transfer-class op |
+
+### Bench JSON (actual)
+
+```json
+{
+  "synthetic_transfer_us": 0.220729,
+  "nft_transfer_us": 0.250479,
+  "nft_transfer_ratio": 1.13478,
+  "htlc_create_us": 1.47135,
+  "budget_nft_p50_ratio_max": 1.5,
+  "budget_nft_hard_fail_ratio": 5.0,
+  "nft_within_hard_fail": true,
+  "note": "portable in-memory; ratio vs synthetic transfer-class op"
+}
+```
+
+### Derived ratios vs synthetic transfer
+
+| Operation | µs (mean) | Ratio vs transfer | §3 target (p50) | §3 hard fail (p99) | Gate |
+|-----------|-----------|-------------------|-----------------|--------------------|------|
+| synthetic_transfer (baseline) | 0.220729 | 1.00× | — | — | — |
+| nft_transfer | 0.250479 | **1.135×** | ≤ 1.5× | > 5× | pass (under p50 target) |
+| htlc_create | 1.47135 | **6.666×** | ≤ 2× | > 8× | under hard fail; **above** p50 target (yellow) |
+
+**nft_transfer:** within hard fail (`nft_within_hard_fail: true`); under soft p50 target 1.5×.  
+**htlc_create:** under hard fail 8×; exceeds soft p50 target 2× → Architect review per §10 yellow band (within 20% of hard fail is optional; here ratio is above target but still &lt; hard fail). Absolute µs are machine-local; **use ratios for CI gates**.
+
+---
+
+## 13. Acceptance
 
 - [x] Global and per-op budgets drafted  
 - [x] State and RC policy  
 - [x] Regression process  
-- [ ] Calibrate absolute µs on reference hardware (implementation phase)  
+- [x] Portable calibration on M3 Ultra (2026-07-26) — absolute µs still host-local; ratios primary  
+- [ ] Calibrate absolute µs on shared reference hardware (implementation phase)  
 - [ ] Human review of NFT 10M projection / storage tiering  
