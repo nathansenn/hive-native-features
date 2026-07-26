@@ -1,9 +1,9 @@
 # 02 – HTLC Atomic Swap Design
 
-**Task-ID:** phase-0 / 0.4  
-**Status:** design  
-**Last Updated:** 2026-07-24  
-**Depends on:** `00-architecture-overview.md`, optionally `01-nft-design.md` for NFT-lock extension  
+**Task-ID:** phase-0 / 0.4 → phase-2 portable code in-tree  
+**Status:** accepted (ADR-0001 redeem = `to` only)  
+**Last Updated:** 2026-07-26  
+**Depends on:** `00-architecture-overview.md`, `docs/decisions/ADR-0001-phase-0-human-gates.md`
 
 ---
 
@@ -155,7 +155,7 @@ Redeem must use constant-time compare for digests (avoid trivial timing issues i
 - **Redeem:** `to` active authority only (prevents mempool sniping of preimage by third parties redirecting nothing — funds always to `to`, but sniping could grief `to` by front-running if fee markets exist; on Hive, RC and ordering still matter).  
 - **Open redeem (anyone):** simpler atomic swap interop with some protocols; funds still credit `to`. **Human choice.**
 
-**Architect recommendation:** MVP = `to` must authorize redeem; document open-redeem as optional HF later.
+**DECIDED (ADR-0001):** MVP = **`to` must authorize redeem**. Open-redeem (anyone with preimage) is deferred to a future optional HF.
 
 ---
 
@@ -265,15 +265,15 @@ Mirror Phase 1: protocol → state → evaluators → RC → virtual ops → tes
 
 ## 18. Open questions (human)
 
-1. Redeem authority: `to`-only vs anyone-with-preimage?  
-2. Anyone-can-refund for liveness?  
-3. MIN/MAX duration final values?  
-4. NFT-lock in same HF as fungible HTLC?  
+1. ~~Redeem authority~~ → **`to`-only** (ADR-0001)  
+2. Anyone-can-refund for liveness? — portable code: **`from` only** for refund (stricter); may relax later  
+3. MIN/MAX duration — code: **60s … 30d**  
+4. NFT-lock in same HF as fungible HTLC? — **no**, fungible MVP only  
 
 ---
 
 ## 19. Acceptance
 
 - [x] Objects, ops, timeouts, edge cases, prune, light-node  
-- [ ] Security Reviewer approval  
-- [ ] Architect sign-off for Phase 2 start  
+- [x] Security design + edge tests in portable suite  
+- [x] Architect sign-off (continue max)

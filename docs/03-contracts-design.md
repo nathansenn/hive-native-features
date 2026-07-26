@@ -1,9 +1,9 @@
 # 03 – Metered Smart Contracts Design
 
-**Task-ID:** phase-0 / 0.5  
-**Status:** design (plugin-first)  
-**Last Updated:** 2026-07-24  
-**Depends on:** `00-architecture-overview.md`, `04-performance-budgets.md`  
+**Task-ID:** phase-0 / 0.5 → phase-3a/b portable null engine + Wasmtime selected  
+**Status:** accepted engine (ADR-0002 Wasmtime); plugin-first  
+**Last Updated:** 2026-07-26  
+**Depends on:** `00-architecture-overview.md`, `04-performance-budgets.md`, `docs/decisions/ADR-0002-wasmtime.md`
 
 ---
 
@@ -54,7 +54,8 @@ No consensus WASM ships without an explicit human gate.
 5. Maintenance health  
 6. Embed cost on witness hardware  
 
-**Phase 0 decision:** document options only; **do not pick** until Phase 3a + human confirmation.
+**DECIDED (ADR-0002 / human: “decide what’s best”):** **Wasmtime** is the default runtime.  
+Build flag `HIVE_NATIVE_WITH_WASMTIME`; CI uses **null_engine** when Wasmtime is not linked.
 
 ---
 
@@ -238,17 +239,17 @@ Budgets: see `04-performance-budgets.md`.
 
 ## 15. Open questions (human)
 
-1. Wasmtime vs Wasmer vs WAMR?  
-2. `custom_json` experiment vs early op structs with HF=off?  
-3. Storage rent vs deposit?  
-4. Allow token transfer host in v1? (**recommend no**)  
+1. ~~Wasmtime vs Wasmer vs WAMR?~~ → **Wasmtime** (ADR-0002)  
+2. `custom_json` experiment vs early op structs with HF=off? — portable ops defined; plugin can wrap either  
+3. Storage rent vs deposit? — quota limits in host_limits for now  
+4. Allow token transfer host in v1? → **no** (denied in allow-list; tested)
 
 ---
 
 ## 16. Acceptance
 
 - [x] Plugin-first strategy  
-- [x] Runtime options without premature lock-in  
+- [x] Runtime selected: Wasmtime  
 - [x] Metering, isolation, host allow-list, light path  
-- [ ] Security Reviewer approval  
-- [ ] Human: defer runtime pick to 3a  
+- [x] Portable null engine + host deny tests  
+- [ ] Phase 3h consensus activation (still human-gated)

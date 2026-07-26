@@ -1,8 +1,8 @@
 # 00 – Architecture Overview
 
 **Task-ID:** phase-0 / 0.2  
-**Status:** design  
-**Last Updated:** 2026-07-24  
+**Status:** accepted (Phase 0 merged)  
+**Last Updated:** 2026-07-25  
 **Audience:** Architect, all specialist agents, human reviewers  
 
 ---
@@ -229,12 +229,17 @@ Exact APIs for light verification are specified per feature doc.
 
 | Decision | Status | Notes |
 |----------|--------|-------|
-| Repo name `hive-native-features` | Accepted (bootstrap) | Public |
-| Feature order NFT → HTLC → contracts | Proposed | Awaiting human Phase 0 review |
-| HF numbers | **TBD** | Human gate |
-| WASM runtime (wasmer / wasmtime / other) | Options only | Phase 3a human gate |
+| Repo name `hive-native-features` | **Accepted** | **Public** repo (ADR-0001) |
+| Feature order NFT → HTLC → contracts | **Approved** | Hybrid phased ship order locked (ADR-0001) |
+| HTLC redeem authority | **Accepted** | **`to`-only redeem** (active authority of `to`); open-redeem deferred |
+| NFT operator model | **Accepted** | **Approval-for-all included** in MVP (`nft_set_approval_for_all` + `nft_operator_object`) |
+| WASM runtime | **Selected** | **Wasmtime** (ADR-0002); plugin-first until 3h |
+| Phase 0 design pack (PR #1) | **Merged** | Phase 0 complete; Phase 1+ unblocked |
+| HF numbers | **TBD** | Upstream human gate |
 | NFT-in-HTLC in Phase 2 MVP | Optional extension | Default fungible-only MVP |
-| Consensus contracts | Not before 3h | Human gate |
+| Consensus contracts | Not before 3h | Human gate (standing) |
+
+See also: `docs/decisions/ADR-0001-phase-0-human-gates.md`, `docs/decisions/ADR-0002-wasmtime.md`.
 
 ---
 
@@ -244,8 +249,8 @@ Exact APIs for light verification are specified per feature doc.
 - [x] Constraints (performance, RC, light-node, pruning) stated
 - [x] Layer map for upstream-friendly work
 - [x] Feature interaction and risks
-- [ ] Reviewer agent approval
-- [ ] Second agent (or human) review
+- [x] Reviewer agent approval
+- [x] Second agent (or human) review
 
 ---
 

@@ -1,9 +1,9 @@
 # 01 – Native NFT Design
 
-**Task-ID:** phase-0 / 0.3  
-**Status:** design  
-**Last Updated:** 2026-07-24  
-**Depends on:** `00-architecture-overview.md`  
+**Task-ID:** phase-0 / 0.3 → phase-1 implementation active  
+**Status:** accepted (ADR-0001) + portable code in-tree  
+**Last Updated:** 2026-07-26  
+**Depends on:** `00-architecture-overview.md`, `docs/decisions/ADR-0001-phase-0-human-gates.md`  
 
 ---
 
@@ -66,10 +66,12 @@ Introduce **native non-fungible tokens** as first-class Hive protocol objects wi
 
 ### 3.3 Operator approvals (collection-wide)
 
-Option A (Phase 1 simpler): only per-token `approved`.  
-Option B: `nft_operator_object` (owner, operator, collection, approved bool).
+**DECIDED (ADR-0001):** MVP includes **both**:
 
-**Recommendation:** Phase 1 ships per-token approve + optional `nft_set_approval_for_all_operation` if indexes stay small; otherwise defer for-all to Phase 1.x.
+1. Per-token `approved` via `nft_approve_operation`
+2. `nft_operator_object` + `nft_set_approval_for_all_operation` (owner, operator, collection; `collection=0` means all collections)
+
+Transfer authorization: owner **or** per-token approved **or** operator-for-all (matching collection or 0).
 
 ---
 
@@ -287,15 +289,16 @@ See `05-verification-and-testing-strategy.md`. Minimum Phase 1:
 
 ## 17. Open questions (human)
 
-1. Per-token approve only vs approval-for-all in MVP?
-2. Max URI length / hash algorithm (RIPEMD-160 vs SHA-256)?
-3. Collection symbol namespace global uniqueness?
-4. HF number and activation timing?
+1. ~~Per-token approve only vs approval-for-all in MVP?~~ → **approval-for-all included** (ADR-0001)
+2. Max URI length / hash algorithm — default **SHA-256 metadata hash**, URI ≤ 256 (locked in code constants)
+3. Collection symbol namespace — **global unique** A–Z0–9 (locked in validator)
+4. HF number and activation timing — still **TBD upstream** (`HIVE_HARDFORK_NFT = 9001` placeholder)
 
 ---
 
 ## 18. Acceptance
 
 - [x] Object model, ops, RC, pruning, light-node, migration notes
-- [ ] Reviewer approval
-- [ ] Architect sign-off for Phase 1 start  
+- [x] Reviewer + human gate (approval-for-all)
+- [x] Architect sign-off for Phase 1 (human: work until maxed)
+- [x] Portable evaluators + tests (see `tests/test_runner.cpp`)
