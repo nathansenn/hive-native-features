@@ -26,6 +26,9 @@ Implemented under `include/hive_native/perf/` and tested by `hive_native_perf_te
 | #151 | `op_dependency.hpp` | Parallel apply schedule |
 | #152 #153 | `worker_pool.hpp` | Priority queues + pool |
 | #891 #894 | `rc_calibrator.hpp` | Measure → RC mapping |
+| #23–#28 (#103–#105) | `rocksdb_presets.hpp` | Witness / mobile / archive RocksDB presets |
+
+See also [ROCKSDB_PRESETS.md](./ROCKSDB_PRESETS.md).
 
 ## Build / test
 

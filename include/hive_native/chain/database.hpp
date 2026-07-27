@@ -89,6 +89,9 @@ struct node_config {
    bool contracts_skip = false;
    bool is_consensus_node = true; // witnesses must be true
    uint32_t hardfork = HIVE_HARDFORK_CONTRACTS; // tests enable all
+   // Optional named presets: see node_profiles.hpp (full / api_pruned / mobile_light).
+   // Call apply_profile(config, node_profile::...) or apply_default_profile(config)
+   // at startup. CMake -DHIVE_LIGHT_NODE=ON selects mobile_light as default_profile().
 };
 
 class database {

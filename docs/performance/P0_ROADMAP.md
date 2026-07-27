@@ -9,7 +9,7 @@ Ordered for parallel workstreams. Status reflects `hive-native-features` portabl
 | 4 | storage | portable-prototype | Replace Boost.MultiIndex secondary indexes with absl::flat_hash_map or open-addressing for hot lookups |
 | 6 | storage | todo | Hybrid mode: consensus objects in SHM chainbase; non-consensus indexes in RocksDB + LRU |
 | 13 | storage | todo | Differential / incremental state snapshots (only changed objects) |
-| 23 | storage | todo | RocksDB block cache sized to 20–30% of free RAM |
+| 23 | storage | portable-prototype | RocksDB block cache sized to 20–30% of free RAM |
 | 32 | storage | portable-prototype | Fast concurrent integrity (xxHash) without blocking readers |
 | 43 | storage | todo | Selective undo: track only changed fields not whole objects |
 | 63 | storage | portable-prototype | Primary-key caching for get_account / find_account |
