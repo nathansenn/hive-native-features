@@ -23,9 +23,25 @@ jobs:
       - name: Build
         run: cmake --build build --parallel
 
-      - name: Test
+      # Runs every registered CTest (hive_native_tests, hive_native_perf_tests,
+      # plus any P0 targets added via add_test). Non-zero exit fails the job.
+      - name: Test (all ctest)
         run: ctest --test-dir build --output-on-failure
-        # Non-zero exit from ctest fails the job when tests fail.
 
-      - name: Benchmark
+      # Always required when HIVE_NATIVE_BUILD_BENCH is ON (CMake default).
+      - name: Benchmark (hive_native_bench)
         run: ./build/hive_native_bench
+
+      # Optional RC calibration harness (#891). Run if present; soft-skip only
+      # when the binary is missing (|| true / skip path is for missing only —
+      # a non-zero exit from a built binary still fails the job).
+      - name: Benchmark RC calibration (hive_native_bench_rc if present)
+        run: |
+          set -euo pipefail
+          if [ -x ./build/hive_native_bench_rc ]; then
+            echo "Running hive_native_bench_rc"
+            ./build/hive_native_bench_rc
+          else
+            echo "hive_native_bench_rc not found; skipping (optional target)"
+            true
+          fi
