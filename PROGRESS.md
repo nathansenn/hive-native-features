@@ -1,8 +1,8 @@
 # Progress – hive-native-features
 
 **Current Phase:** Phases 1–3 portable implementation (plugin-first); **3h still gated**  
-**Last Updated:** 2026-07-26  
-**Active Branch:** `phase-1-nft`  
+**Last Updated:** 2026-07-27  
+**Active Branch:** `swarm-perf-p0-impl`  
 **Open PRs:** none tracked for portable pack (Phase 0 PR #1 **merged**)  
 **Repo:** https://github.com/nathansenn/hive-native-features  
 
@@ -140,3 +140,51 @@ cmake --build build -j
 - P0 roadmap: `docs/performance/P0_ROADMAP.md`
 - Portable prototypes: `include/hive_native/perf/*` + `hive_native_perf_tests` (27 checks)
 - Verification: feature tests 165 pass; perf tests 27 pass; ctest 2/2
+
+## swarm-perf-p0-impl (2026-07-27)
+
+**Branch:** `swarm-perf-p0-impl` · **Workdir:** `/tmp/hive-native-features`  
+**Orchestrator:** [docs/swarm/perf-00-orchestrator.md](./docs/swarm/perf-00-orchestrator.md)
+
+### Deliverables (portable code)
+
+| Area | Artefacts | Catalogue IDs |
+|------|-----------|---------------|
+| Apply scheduler | `perf/apply_scheduler.hpp`, `perf/op_dependency.hpp`, dep stress + scheduler tests | #151 |
+| Account PK cache | `perf/account_cache.hpp`, `chain/account_index.hpp` | #63 (+ #4 #424 backend) |
+| SIMD arithmetic | `perf/simd_math.hpp` | #209 |
+| Known-tx set | `perf/known_tx_set.hpp`, `perf/bloom.hpp` | #204 |
+| Light profiles | `chain/node_profiles.hpp` | #8 #691 |
+| RC calibration | `perf/rc_calibrator.hpp`, `benchmarks/bench_rc_calibrate.cpp` | #891 #894 |
+| RocksDB presets | `perf/rocksdb_presets.hpp` | #23–#28, #103–#105 |
+| Selective undo | `perf/selective_undo.hpp` | #43 |
+| Compact block | `perf/compact_block.hpp` | #301 |
+| Worker pool | `perf/worker_pool.hpp` | #152 #153 #155 |
+| Arena / xxHash | `perf/arena.hpp`, `perf/xxhash64.hpp` | #72 #219 #32 #84 |
+| HTLC fuzz | `tests/fuzz_htlc_preimage.cpp` | verification strategy §8 |
+
+### Catalogue status flips (JSON)
+
+See orchestrator report for full list. **14** status upgrades in `docs/performance/HIVE_1000_OPTIMIZATIONS.json` (todo/design → portable-prototype or partial-portable).
+
+### Swarm reports
+
+All `docs/swarm/perf-*.md` reports are indexed in `docs/swarm/perf-00-orchestrator.md` (perf-00 … perf-13 + perf-19; gaps at perf-07 and perf-14–18).
+### Verification log (2026-07-27)
+
+| Task-ID | Result | Notes | Date | Agent |
+|---------|--------|-------|------|-------|
+| swarm-perf-p0-impl | PASS | Portable P0 prototypes + status catalogue sync | 2026-07-27 | perf-00 orchestrator |
+| perf-01-apply-scheduler | PASS | #151 layers + parallel_width | 2026-07-27 | swarm |
+| perf-02-account-cache | PASS | #63 cache-aside account_index | 2026-07-27 | swarm |
+| perf-03-simd | PASS | #209 NEON/SSE2/scalar | 2026-07-27 | swarm |
+| perf-04-known-tx | PASS | #204 bloom + exact set | 2026-07-27 | swarm |
+| perf-05-light-profiles | PASS | #8 #691 node_profiles | 2026-07-27 | swarm |
+| perf-06-rc-cal | PASS | #891 bench harness | 2026-07-27 | swarm |
+| perf-08-rocksdb | PASS | #23–#28 / #103–#105 presets | 2026-07-27 | swarm |
+| perf-09-undo | PASS | #43 selective undo | 2026-07-27 | swarm |
+| perf-10-compact-block | PASS | #301 short IDs + fill | 2026-07-27 | swarm |
+| perf-11-dep-stress | PASS | #151 avg factor > 1.5 | 2026-07-27 | swarm |
+| perf-12-ci | PASS | ctest + benches gate | 2026-07-27 | swarm |
+| perf-13-fuzz | PASS | HTLC preimage fuzz 5k iters | 2026-07-27 | swarm |
+| perf-19-gitops | PASS | Commit/push/PR for swarm-perf-p0-impl | 2026-07-27 | GitOps |
